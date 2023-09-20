@@ -5,9 +5,11 @@ use \App\Controllers\AutenticacionController;
 
 
 app()->get('/', 'IndexController@index');
+app()->get('/home', 'IndexController@index');
 
 //Autenticacion
 app()->get('/login','AutenticacionController@login_view');
+app()->get('/logout','AutenticacionController@logout');
 app()->post('/VerifiedLogin','AutenticacionController@login');
 app()->get('/register','AutenticacionController@register_view');
 app()->post('/registerData','AutenticacionController@RegisterData');

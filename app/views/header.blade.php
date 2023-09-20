@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -11,6 +11,7 @@
 
 <body>
     <header>
+        <?php session_start();?>
         <figure>
             <img src="{{assets('img/app/Logo.png')}}" alt="" id="Logo">
         </figure>
@@ -20,9 +21,20 @@
                 <li><a href="">Bienvenida</a></li>
                 <li>
                     <ul id="Control">
-                        <li><a href="login">Iniciar Sesion</a></li>
+                        <?php
+                            if(!isset($_SESSION['Email'])){?>
+                                <li><a href="login">Iniciar Sesion</a></li>
+                            <?php }
+                        ?>
+                        <?php
+                            if(isset($_SESSION['Email']))
+                            {?>
                         <li><a href="#">Perfil</a></li>
                         <li><a href="register">Registrar</a></li>
+                        <li><a href="logout">Cerrar Sesión</a>
+                        <?php
+                            }
+                        ?>
                     </ul>
                 </li>
             </ul>

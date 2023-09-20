@@ -5,7 +5,10 @@ namespace App\Models\User;
 use App\Models\Model;
 use App\Models\User\Admin;
 use App\Models\User\Medic;
+use App\Models\User\Patient;
 use App\Services\proxy_bd;
+use Leaf\Helpers\Password;
+use Leaf\Auth;
 
 
 class Auth_Manager extends Model
@@ -15,7 +18,7 @@ class Auth_Manager extends Model
     {
         $admin = new Admin();
         $admin->setEmail($email);
-        $admin->setPassword($password);
+        $admin->setPassword(Password::hash($password, Password::BCRYPT));
         $admin->setNombre($nombre);
         $admin->setApellido_p($apellidoPaterno);
         $admin->setApellido_m($apellidoMaterno);
@@ -38,7 +41,7 @@ class Auth_Manager extends Model
     {
         $medic = new Medic();
         $medic->setEmail($email);
-        $medic->setPassword($password);
+        $medic->setPassword(Password::hash($password, Password::BCRYPT));
         $medic->setNombre($nombre);
         $medic->setApellido_p($apellidoPaterno);
         $medic->setApellido_m($apellidoMaterno);
@@ -63,7 +66,7 @@ class Auth_Manager extends Model
     {
         $patient = new Patient();
         $patient->setEmail($email);
-        $patient->setPassword($password);
+        $patient->setPassword(Password::hash($password, Password::BCRYPT));
         $patient->setNombre($nombre);
         $patient->setApellido_p($apellidoPaterno);
         $patient->setApellido_m($apellidoMaterno);
@@ -80,5 +83,31 @@ class Auth_Manager extends Model
 
         $bd->registerPatient($patient);
         return true;
+    }
+
+    public function loginUser($email,$password) : bool
+    {
+        $bd = new proxy_bd();
+
+        $user = $bd->queryOneUser($email);
+        if(!$user)
+        {
+            return false;
+        }
+        if (Password::verify($password, $user['Password'])) {
+            session_start();
+            $_SESSION['ID_User'] = $user['ID_Usuario'];
+            $_SESSION['Email'] = $user['Email'];
+            $_SESSION['Rol'] = $user['Rol'];
+            return true;
+        }
+        return false;
+    }
+
+    public function logout() : void
+    {
+        session_start();
+        session_destroy();
+        session_unset();
     }
 }

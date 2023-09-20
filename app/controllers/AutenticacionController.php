@@ -38,6 +38,13 @@ class AutenticacionController extends Controller
         if ($this->request->getMethod() === 'POST') {
             $email = app()->request->get('email');
             $password = app()->request->get('password');
+            $g_autenticacion = new Auth_Manager();
+            $resultLogin = $g_autenticacion->loginUser($email,$password);
+            if(!$resultLogin)
+            {
+                return redirect('login?error=1');
+            }
+            return redirect('home');
         }
     }
 
@@ -113,6 +120,11 @@ class AutenticacionController extends Controller
         }
     }
 
-
-    
+    /* Cerrar Sesion */
+    public function logout()
+    {
+        $g_Autenticacion = new Auth_Manager();
+        $g_Autenticacion->logout();
+        redirect('login');
+    }
 }
