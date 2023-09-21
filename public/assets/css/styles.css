@@ -2,6 +2,11 @@ body {
     margin: 0px;
     padding: 0px;
 }
+footer {
+    background-color: rgb(0, 0, 0);
+    padding: 20px;
+}
+
 
 #Logo {
     height: 200px;
@@ -111,12 +116,36 @@ option {
     padding-bottom: 10px;
 }
 
-footer {
-    background-color: black;
-    color: white;
+#DatoT
+{
+    width: 48%;
 }
 
-@media screen and (max-width:700px) {
+#DivFoto
+{
+    width: 48%;
+}
+
+.left, .center, .right{
+    display: inline-block;
+}
+
+.left
+{
+    float: left;
+}
+
+.center {
+    text-align: center;
+  }
+  
+  .right {
+    float: right;
+  }
+
+
+
+@media screen and (max-width:600px) {
     .formulario {
         padding: 20px;
         border: 1px solid #f3f3f3;

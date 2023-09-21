@@ -7,6 +7,7 @@ class IndexController extends Controller
 {
     public function index()
     {
+        session_start();
         render('index');
     }
 }

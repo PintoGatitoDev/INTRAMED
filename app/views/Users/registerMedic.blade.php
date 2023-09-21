@@ -4,7 +4,7 @@
 <section class="Contenido">
     <form action="registerMedicBD" method="post" class="formulario" id="Login">
         <h2>Ingresa sus datos</h2>
-        <input type="hidden" name="rol" id="rol" value="Admin" />
+        <input type="hidden" name="rol" id="rol" value="Medic" />
         <?php render("Users/formregister");?>
         <label for="Subrol">Subrol</label>
         <select name="Subrol" id="Subrol">

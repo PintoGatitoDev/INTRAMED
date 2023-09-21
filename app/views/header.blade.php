@@ -11,14 +11,13 @@
 
 <body>
     <header>
-        <?php session_start();?>
         <figure>
             <img src="{{assets('img/app/Logo.png')}}" alt="" id="Logo">
         </figure>
 
         <nav id="Menu">
             <ul>
-                <li><a href="">Bienvenida</a></li>
+                <li><a href="home">Bienvenida</a></li>
                 <li>
                     <ul id="Control">
                         <?php
@@ -29,7 +28,7 @@
                         <?php
                             if(isset($_SESSION['Email']))
                             {?>
-                        <li><a href="#">Perfil</a></li>
+                        <li><a href="profile">Perfil</a></li>
                         <li><a href="register">Registrar</a></li>
                         <li><a href="logout">Cerrar Sesión</a>
                         <?php

@@ -6,25 +6,11 @@ use App\Models\User\User;
 
 class Patient extends User
 {
-    protected int $ID_Usuario;
+    protected int $id_patient;
     protected string $Estado_Civil;
     protected string $Genero;
 
-	/**
-	 * @return int
-	 */
-	public function getID_Usuario(): int {
-		return $this->ID_Usuario;
-	}
 	
-	/**
-	 * @param int $ID_Usuario 
-	 * @return self
-	 */
-	public function setID_Usuario(int $ID_Usuario): self {
-		$this->ID_Usuario = $ID_Usuario;
-		return $this;
-	}
 	
 	/**
 	 * @return string
@@ -55,6 +41,22 @@ class Patient extends User
 	 */
 	public function setGenero(string $Genero): self {
 		$this->Genero = $Genero;
+		return $this;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getId_patient(): int {
+		return $this->id_patient;
+	}
+	
+	/**
+	 * @param int $id_patient 
+	 * @return self
+	 */
+	public function setId_patient(int $id_patient): self {
+		$this->id_patient = $id_patient;
 		return $this;
 	}
 }

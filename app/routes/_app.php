@@ -20,4 +20,5 @@ app()->post('/registerAdminBD','AutenticacionController@registerAdminBD');
 app()->post('/registerMedicBD','AutenticacionController@registerMedicBD');
 app()->post('/registerPatientBD','AutenticacionController@registerPatientBD');
 
-//registerBD
+//usuarios
+app()->get('/profile','UserController@profile');
