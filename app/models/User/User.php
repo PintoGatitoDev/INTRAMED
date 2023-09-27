@@ -18,19 +18,21 @@ class User extends Model
     protected string $foto;
     protected string $direccion;
     protected string $telefono;
+	protected string $fecha_Nacimiento;
+	protected string $genero;
 
 	/**
 	 * @return int
 	 */
-	public function getId(): int {
+	public function getId_user(): int {
 		return $this->id_user;
 	}
 	
 	/**
-	 * @param int $id 
+	 * @param int $id_user 
 	 * @return self
 	 */
-	public function setId(int $id_user): self {
+	public function setId_user(int $id_user): self {
 		$this->id_user = $id_user;
 		return $this;
 	}
@@ -208,6 +210,38 @@ class User extends Model
 	 */
 	public function setTelefono(string $telefono): self {
 		$this->telefono = $telefono;
+		return $this;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getFecha_Nacimiento(): string {
+		return $this->fecha_Nacimiento;
+	}
+	
+	/**
+	 * @param string $fecha_Nacimiento 
+	 * @return self
+	 */
+	public function setFecha_Nacimiento(string $fecha_Nacimiento): self {
+		$this->fecha_Nacimiento = $fecha_Nacimiento;
+		return $this;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getGenero(): string {
+		return $this->genero;
+	}
+	
+	/**
+	 * @param string $genero 
+	 * @return self
+	 */
+	public function setGenero(string $genero): self {
+		$this->genero = $genero;
 		return $this;
 	}
 }

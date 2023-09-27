@@ -13,8 +13,8 @@ use Leaf\Auth;
 
 class Auth_Manager extends Model
 {
-    public function registerAdmin($email, $password, $nombre, 
-    $apellidoPaterno, $apellidoMaterno, $direccion, $telefono, $rol, $subrol) : bool
+    public function registerAdmin($email, $password, $nombre, $apellidoPaterno,
+    $apellidoMaterno, $rol, $ifFoto, $direccion, $telefono, $fecha_Nac,$genero, $subrol) : bool
     {
         $admin = new Admin();
         $admin->setEmail($email);
@@ -25,9 +25,11 @@ class Auth_Manager extends Model
         $admin->setRol($rol);
         $admin->setFecha_alta(date('Y-m-d'));
         $admin->setHora_alta(date('H:i:s'));
-        $admin->setFoto('');
+        $admin->setFoto($ifFoto);
         $admin->setDireccion($direccion);
         $admin->setTelefono($telefono);
+        $admin->setFecha_Nacimiento($fecha_Nac);
+        $admin->setGenero($genero);
         $admin->setSubrol($subrol);
 
         $admin->generatePassSecurity();
@@ -36,8 +38,9 @@ class Auth_Manager extends Model
         return $bd->registerAdmin($admin);
     }
 
-    public function registerMedic($email, $password, $nombre, $apellidoPaterno, 
-    $apellidoMaterno, $direccion, $telefono, $rol, $subrol,$nivelEstudio,$experienciaMedica) : bool
+    public function registerMedic($email, $password, $nombre, $apellidoPaterno, $apellidoMaterno,
+    $rol, $ifFoto, $direccion, $telefono, $fecha_Nac, $genero, $subrol, $nivelEstudio, $experienciaMedica, 
+    $area_Trabajo) : bool
     {
         $medic = new Medic();
         $medic->setEmail($email);
@@ -48,12 +51,15 @@ class Auth_Manager extends Model
         $medic->setRol($rol);
         $medic->setFecha_alta(date('Y-m-d'));
         $medic->setHora_alta(date('H:i:s'));
-        $medic->setFoto('');
+        $medic->setFoto($ifFoto);
         $medic->setDireccion($direccion);
         $medic->setTelefono($telefono);
+        $medic->setFecha_Nacimiento($fecha_Nac);
+        $medic->setGenero($genero);
         $medic->setSubrol($subrol);
         $medic->setNivel_Estudio($nivelEstudio);
         $medic->setExperiencia_Medic($experienciaMedica);
+        $medic->setArea_Trabajo($area_Trabajo);
 
         $bd = new proxy_bd();
 
@@ -61,8 +67,8 @@ class Auth_Manager extends Model
         return true;
     }
 
-    public function registerPatient($email, $password, $nombre, $apellidoPaterno, 
-    $apellidoMaterno, $direccion, $telefono, $rol, $subrol,$estado_civil,$genero): bool
+    public function registerPatient($email, $password, $nombre, $apellidoPaterno, $apellidoMaterno, 
+    $rol, $foto, $direccion, $telefono, $fecha_Nac, $genero, $estado_civil,$NSS, $numero_Emergencia): bool
     {
         $patient = new Patient();
         $patient->setEmail($email);
@@ -71,16 +77,18 @@ class Auth_Manager extends Model
         $patient->setApellido_p($apellidoPaterno);
         $patient->setApellido_m($apellidoMaterno);
         $patient->setRol($rol);
-        $patient->setFecha_alta(date('Y-m-d'));
-        $patient->setHora_alta(date('H:i:s'));
-        $patient->setFoto('');
+        $patient->setFoto($foto);
         $patient->setDireccion($direccion);
         $patient->setTelefono($telefono);
-        $patient->setEstado_Civil($estado_civil);
+        $patient->setFecha_Nacimiento($fecha_Nac);
+        $patient->setFecha_alta(date('Y-m-d'));
+        $patient->setHora_alta(date('H:i:s'));
         $patient->setGenero($genero);
+        $patient->setEstado_Civil($estado_civil);
+        $patient->setNSS($NSS);
+        $patient->setNumero_Emergencia($numero_Emergencia);
 
         $bd = new proxy_bd();
-
         $bd->registerPatient($patient);
         return true;
     }

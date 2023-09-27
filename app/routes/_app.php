@@ -20,5 +20,11 @@ app()->post('/registerAdminBD','AutenticacionController@registerAdminBD');
 app()->post('/registerMedicBD','AutenticacionController@registerMedicBD');
 app()->post('/registerPatientBD','AutenticacionController@registerPatientBD');
 
+
 //usuarios
 app()->get('/profile','UserController@profile');
+app()->get('/EditInfPago/{id}','UserController@editInfPago');
+
+//Usuarios - Info Pago
+app()->get('/NewInfoPago','UserController@newInfPago_view');
+app()->get('/addMethodBD','UserController@addMethodBD');

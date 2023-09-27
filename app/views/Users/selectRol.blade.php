@@ -2,7 +2,7 @@
 
 
 <section class="Contenido">
-    <form action="registerData" method="post" class="formulario" id="Login">
+    <form action="registerData" method="post" class="formulario" id="Register">
         <h2>Elije el rol de la persona</h2>
         <label for="rol">Rol</label>
         <select name="rol" id="rol">

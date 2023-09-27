@@ -17,7 +17,7 @@ header figure {
 }
 
 #Menu {
-    background-color: #1100ff;
+    background-color: #58ACFA;
     margin-bottom: 20px;
 }
 
@@ -118,12 +118,22 @@ option {
 
 #DatoT
 {
-    width: 48%;
+    display: inline-block;
+    width: 60%;
+    vertical-align: top;
+    padding: 10px;
 }
 
 #DivFoto
 {
-    width: 48%;
+    display: inline-block;
+    width: 30%;
+    padding: 10px;
+}
+
+#DivFoto img
+{
+    width: 100%;
 }
 
 .left, .center, .right{
@@ -143,6 +153,113 @@ option {
     float: right;
   }
 
+#perfilOpciones, #apartados
+{
+  display: inline-block;
+  padding: 20px;
+  margin: 0px;
+  vertical-align: top;
+  background-color: #FFFFFF;
+  margin: 20px 0px;
+}
+
+.Main
+{
+    width: 97%;
+    padding: 0px;
+    margin-left: 1%;
+    background-color: #f7fcff;
+    border-radius: 10px;
+}
+
+#apartados
+{
+    width: 70%;
+}
+.apartado
+{
+    width: 90%;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    background-color: #ccc;
+}
+.apartado img
+{
+    width: 100%;
+    background-color: #58ACFA;
+}
+#opcion
+{
+    text-align: left;
+    padding: 0px;
+}
+
+#opcion li
+{
+    list-style: none;
+}
+
+#opcion a
+{
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    background-color: #ccc;
+    padding: 8px 20px;
+    width: 80%;
+    margin: 10px 0px;
+}
+
+#TDatosPago
+{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#TDatosPago thead
+{
+    background-color: #89b2ff;
+}
+
+#TDatosPago table thead
+{
+    background-color: #ffffff;
+}
+
+#TDatosPago table th
+{
+    padding: 5px 10px;
+}
+
+#TDatosPago th
+{
+    padding: 15px 20px;
+}
+
+#TDatosPago table a
+{
+    padding: 10px 5px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    margin: 0px 5px;
+}
+
+.Opciones h2, .Opciones a
+{
+    display: inline-block;
+}
+.Opciones a
+{
+    background-color: #588ab9;
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
 
 
 @media screen and (max-width:600px) {
@@ -159,3 +276,4 @@ option {
         height: 150px;
     }
 }
+

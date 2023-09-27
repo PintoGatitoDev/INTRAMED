@@ -8,9 +8,25 @@ class Patient extends User
 {
     protected int $id_patient;
     protected string $Estado_Civil;
-    protected string $Genero;
+    protected string $NSS;
+	protected int $numero_Emergencia;
 
+
+	/**
+	 * @return int
+	 */
+	public function getId_patient(): int {
+		return $this->id_patient;
+	}
 	
+	/**
+	 * @param int $id_patient 
+	 * @return self
+	 */
+	public function setId_patient(int $id_patient): self {
+		$this->id_patient = $id_patient;
+		return $this;
+	}
 	
 	/**
 	 * @return string
@@ -31,32 +47,32 @@ class Patient extends User
 	/**
 	 * @return string
 	 */
-	public function getGenero(): string {
-		return $this->Genero;
+	public function getNSS(): string {
+		return $this->NSS;
 	}
 	
 	/**
-	 * @param string $Genero 
+	 * @param string $NSS 
 	 * @return self
 	 */
-	public function setGenero(string $Genero): self {
-		$this->Genero = $Genero;
+	public function setNSS(string $NSS): self {
+		$this->NSS = $NSS;
 		return $this;
 	}
-
+	
 	/**
 	 * @return int
 	 */
-	public function getId_patient(): int {
-		return $this->id_patient;
+	public function getNumero_Emergencia(): int {
+		return $this->numero_Emergencia;
 	}
 	
 	/**
-	 * @param int $id_patient 
+	 * @param int $numero_Emergencia 
 	 * @return self
 	 */
-	public function setId_patient(int $id_patient): self {
-		$this->id_patient = $id_patient;
+	public function setNumero_Emergencia(int $numero_Emergencia): self {
+		$this->numero_Emergencia = $numero_Emergencia;
 		return $this;
 	}
 }

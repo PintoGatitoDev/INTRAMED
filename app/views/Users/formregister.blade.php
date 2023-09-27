@@ -19,5 +19,14 @@
 <label for="Telefono">Teléfono</label>
 <input type="text" id="Telefono" name="Telefono" placeholder="Teléfono">
 
+<label for="Fecha_Nac">Fecha de Nacimiento</label>
+<input type="date" id="Fecha_Nac" name="Fecha_Nac">
+
+<label for="genero">Género</label>
+<select id="genero" name="genero">
+    <option value="masculino">Masculino</option>
+    <option value="femenino">Femenino</option>
+</select>
+
 <label for="Foto">Foto</label>
-<input type="file" id="Foto" name="Foto" placeholder="Foto">
+<input type="file" id="Foto" name="Foto">

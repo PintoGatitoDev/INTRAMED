@@ -5,8 +5,9 @@
         <a href="#">twitter</a>
         <a href="#">instagram</a>
     </article>
+    <script <script src="{{assets('js/app.js')}}"></script>
 </footer>
-<script <script src="{{assets('js/app.js')}}"></script>></script>
+
 </body>
 
 </html>

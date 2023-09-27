@@ -7,9 +7,11 @@ use App\Models\User\Employee;
 class Medic extends Employee
 {
     protected int $id_Medic;
-    protected string $subrol;
     protected string $nivel_Estudio;
     protected string $experiencia_Medic;
+	protected string $area_Trabajo;
+
+	
 
 	/**
 	 * @return int
@@ -24,22 +26,6 @@ class Medic extends Employee
 	 */
 	public function setId_Medic(int $id_Medic): self {
 		$this->id_Medic = $id_Medic;
-		return $this;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getSubrol(): string {
-		return $this->subrol;
-	}
-	
-	/**
-	 * @param string $subrol 
-	 * @return self
-	 */
-	public function setSubrol(string $subrol): self {
-		$this->subrol = $subrol;
 		return $this;
 	}
 	
@@ -72,6 +58,22 @@ class Medic extends Employee
 	 */
 	public function setExperiencia_Medic(string $experiencia_Medic): self {
 		$this->experiencia_Medic = $experiencia_Medic;
+		return $this;
+	}
+	
+	/**
+	 * @return string
+	 */
+	public function getArea_Trabajo(): string {
+		return $this->area_Trabajo;
+	}
+	
+	/**
+	 * @param string $area_Trabajo 
+	 * @return self
+	 */
+	public function setArea_Trabajo(string $area_Trabajo): self {
+		$this->area_Trabajo = $area_Trabajo;
 		return $this;
 	}
 }

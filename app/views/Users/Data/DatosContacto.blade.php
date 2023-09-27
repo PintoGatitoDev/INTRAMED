@@ -1,13 +1,12 @@
 <h2>Datos Personales</h2>
-<div id="DatoT">
+<div>
     <p>
-        <div class="left"><span>Telefono:</span></div>
+        <div class="left"><span>Telefono: </span>{{ $telefono}}</div>
     </p>
 
     <p>
-        <div class="left"><span>Dirección:</span></div>
+        <div class="center"><span>Dirección: </span> {{ $direccion}}</div>
     </p>
 
     <a href="#">Editar Datos</a>
 </div>
-<div id="DivFoto"></div>

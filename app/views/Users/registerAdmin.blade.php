@@ -2,7 +2,7 @@
 
 
 <section class="Contenido">
-    <form action="registerAdminBD" method="post" class="formulario" id="Login">
+    <form action="registerAdminBD" method="post" class="formulario" id="Login" enctype="multipart/form-data">
         <h2>Ingresa sus datos</h2>
         <input type="hidden" name="rol" id="rol" value="Admin" />
         <?php render("Users/formregister");?>

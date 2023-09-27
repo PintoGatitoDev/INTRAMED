@@ -23,6 +23,7 @@
                         <?php
                             if(!isset($_SESSION['Email'])){?>
                                 <li><a href="login">Iniciar Sesion</a></li>
+                                
                             <?php }
                         ?>
                         <?php
