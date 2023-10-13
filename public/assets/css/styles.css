@@ -1,64 +1,67 @@
 body {
-    margin: 0px;
-    padding: 0px;
-}
-footer {
-    background-color: rgb(0, 0, 0);
-    padding: 20px;
+    padding: 0;
+    margin: 0;
 }
 
-
-#Logo {
-    height: 200px;
-}
-
-header figure {
+header {
+    background-color: #3957d8;
     text-align: center;
 }
 
-#Menu {
-    background-color: #58ACFA;
-    margin-bottom: 20px;
-}
+#Logo {
 
-#Menu li {
+    height: 150px;
     display: inline-block;
+    padding: 0px;
     margin: 0px;
 }
 
+#Menu {
+
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    text-align: left;
+}
+
+#Menu ul {
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+#Menu ul li {
+    list-style: none;
+    display: inline-block;
+}
+
 #Menu a {
-    display: block;
-    padding: 10px 20px;
-    color: #ffffff;
+    display: inline-block;
+    padding: 10px 40px;
+    color: white;
     text-decoration: none;
 }
 
 #Menu a:hover {
-    background-color: #6a6dff;
+    background-color: rgb(134, 172, 255);
 }
 
-
-#Menu ul {
-    margin: 0px;
-}
-
-
-section {
-    text-align: center;
-    margin: 30px 0px;
+.Contenido {
+    margin: 20px;
 }
 
 .formulario {
     padding: 20px;
-    border: 1px solid #f3f3f3;
+    border: 1px solid #e6e6e6;
     display: inline-block;
-    width: 40%;
+    width: 50%;
     margin: 0 auto;
     border-radius: 5px;
     box-shadow: 0px 1px black;
 }
 
-label {
+.formulario label {
     width: 100%;
     display: block;
     text-align: left;
@@ -66,69 +69,169 @@ label {
     margin-bottom: 10px;
 }
 
-input {
+
+.formulario input[type="email"],
+.formulario input[type="password"],
+.formulario input[type="text"],
+.formulario input[type="number"] {
+    border-bottom: 1px solid #dfdfdf;
     width: 100%;
     height: 40px;
     border: 0px;
+    border-bottom: 1px solid whitesmoke;
     margin: 20px 0px;
 }
 
-input[type="email"],
-input[type="password"],
-input[type="text"],
-input[type="number"] {
-    border-bottom: 1px solid #dfdfdf;
-}
-
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="number"]:focus {
+.formulario input[type="email"]:focus,
+.formulario input[type="password"]:focus,
+.formulario input[type="number"]:focus {
     border-bottom: 1px solid #000000;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.125);
     outline: none;
 }
 
-input[type="submit"] {
-    background-color: #474747;
-    color: #ffffff;
-    font-weight: bold;
-    cursor: pointer;
-    width: 50%;
-    height: 40px;
-    border: none;
-    border-radius: 5px;
-}
-
-
-input[type="submit"]:hover {
-    background-color: #333333;
-}
-
-select {
+.formulario select {
     width: 100%;
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 20px;
 }
 
-option {
+.formulario option {
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
-#DatoT
+.boton_negro {
+    background-color: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    width: 50%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+}
+
+.boton_negro:hover {
+    background-color: #474747;
+}
+
+.datos_medicos
 {
     display: inline-block;
-    width: 60%;
-    vertical-align: top;
+    width: 90%;
+    background-color: #ffffff;
     padding: 10px;
 }
 
-#DivFoto
+.datos_medicos span
 {
     display: inline-block;
-    width: 30%;
+    width: 45%;
+    text-align: left;
+    margin: 10px auto;
+    vertical-align: top;
+}
+
+.datos_medicos input, .datos_medicos textarea
+{
+    display: inline-block;
+    width: 45%;
+    
+}
+
+
+/* Main */
+
+main {
+    text-align: center;
+}
+
+#carrusel img {
+    width: 100%;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    display: block;
+}
+
+.modal_contenido
+{
+    background-color: #FFFFFF;
+    width: 50%;
+    margin: 20px auto;
     padding: 10px;
+    border-radius: 15px;
+}
+
+.profile
+{
+    display: inline-block;
+    width: 97%;
+    background-color: #fdfdfd;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: 1px solid #ebebeb;
+}
+
+#perfilOpciones, #apartados, #DivDatosP, #DivFoto
+{
+    display: inline-block;
+}
+
+
+#perfilOpciones
+{
+    width: 20%;
+}
+
+#perfilOpciones
+{
+    width: 20%;
+    text-align: right;
+    vertical-align: top;
+}
+
+#perfilOpciones #opcion li
+{
+    display: inline-block;
+    list-style: none;
+    width: 99%;
+    text-align: center;
+}
+
+#perfilOpciones #opcion a
+{
+    display: inline-block;
+    background-color: #045FB4;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 10px;
+    width: 90%;
+    margin: 5px;
+}
+
+#apartados
+{
+    width: 75%;
+    text-align: center;
+}
+
+#DivDatosP
+{
+    width: 70%;
+    vertical-align: top;
+}
+#DivFoto
+{
+    width: 25%;
 }
 
 #DivFoto img
@@ -136,133 +239,159 @@ option {
     width: 100%;
 }
 
-.left, .center, .right{
+.form_edit
+{
     display: inline-block;
+    width: 99%;
+    padding: 10px;
 }
 
-.left
-{
-    float: left;
-}
 
-.center {
-    text-align: center;
-  }
-  
-  .right {
-    float: right;
-  }
-
-#perfilOpciones, #apartados
+.form_edit .left,.form_edit .right,.form_edit .center, .form_edit input[type="text"]
 {
-  display: inline-block;
-  padding: 20px;
-  margin: 0px;
-  vertical-align: top;
-  background-color: #FFFFFF;
-  margin: 20px 0px;
-}
-
-.Main
-{
-    width: 97%;
-    padding: 0px;
-    margin-left: 1%;
-    background-color: #f7fcff;
-    border-radius: 10px;
-}
-
-#apartados
-{
-    width: 70%;
-}
-.apartado
-{
-    width: 90%;
-    padding: 20px;
-    margin: 20px;
-    text-align: center;
-    background-color: #ccc;
-}
-.apartado img
-{
-    width: 100%;
-    background-color: #58ACFA;
-}
-#opcion
-{
+    display: inline-block;
+    width: 45%;
     text-align: left;
-    padding: 0px;
 }
 
-#opcion li
+.form_edit input:disabled, .datos_medicos input:disabled, .datos_medicos textarea:disabled
 {
-    list-style: none;
+    border: none;
+    opacity: 1;
+    font-weight: bold;
+    font-variant: normal;
 }
 
-#opcion a
+.invisible, .binvisible
+{
+    display: none;
+}
+
+.visible, .bvisible
 {
     display: inline-block;
+}
+
+
+#editpersonales, #guardar, #cancelarP, #editcontacto, #cancelarC
+{
+    background-color: #0040FF;
+    padding: 10px;
     text-decoration: none;
-    color: rgb(0, 0, 0);
-    background-color: #ccc;
-    padding: 8px 20px;
-    width: 80%;
-    margin: 10px 0px;
+    color: #FFFFFF;
+    border-radius: 15px;
 }
 
-#TDatosPago
+.tabla
 {
-    width: 100%;
+    text-align: center;
+}
+
+
+.TDatos
+{
     border-collapse: collapse;
+    width: 95%;
+    margin: auto;
 }
 
-#TDatosPago thead
+.TDatos thead
 {
-    background-color: #89b2ff;
+    background-color: #55ACEE;
 }
 
-#TDatosPago table thead
+.TDatos thead th
+{
+    padding: 10px;
+}
+.TDatos tbody td
+{
+    padding: 10px;
+}
+
+.TDatos table thead
 {
     background-color: #ffffff;
 }
-
-#TDatosPago table th
+.TDatos table
 {
-    padding: 5px 10px;
+    width: 100%;
 }
 
-#TDatosPago th
-{
-    padding: 15px 20px;
-}
-
-#TDatosPago table a
-{
-    padding: 10px 5px;
-    background-color: black;
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    margin: 0px 5px;
-}
-
-.Opciones h2, .Opciones a
+.Opciones
 {
     display: inline-block;
+    width: 100%;
 }
+
+.Opciones a, .Opciones h2
+{
+    display: inline-block ;
+}
+
 .Opciones a
 {
-    background-color: #588ab9;
-    padding: 20px;
-    color: white;
+    padding: 10px;
+    background-color: #3c7aff;
+    color: #FFFFFF;
     text-decoration: none;
+    float: right;
+    margin: 20px;
+    margin-right: 50px;
+    border-radius: 10px;
+}
+
+.btn_opciones
+{
+    background-color: #000000;
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 10px;
     border-radius: 10px;
 }
 
 
 
-@media screen and (max-width:600px) {
+
+
+
+/* Footer */
+
+footer {
+    border-top: 2px solid rgb(0, 0, 0);
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+
+@media screen and (max-width: 800px) {
     .formulario {
         padding: 20px;
         border: 1px solid #f3f3f3;
@@ -275,5 +404,11 @@ option {
     #Logo {
         height: 150px;
     }
-}
 
+    #perfilOpciones,#DivDatosP,#DivFoto
+    {
+        width: 95%;
+    }
+
+
+}

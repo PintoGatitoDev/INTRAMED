@@ -1,6 +1,7 @@
 <?php render("header"); ?>
 
-<section class="apartado" id="Bienvenida">
+
+<section class="principal" id="Bienvenida">
     <h1>Bienvenido a Intramed</h1>
     <div id="carrusel">
         <img src="{{assets('img/app/1.png')}}" alt="Imagen 1" id="img1" class="img_carru" style="display: block;">
@@ -14,4 +15,5 @@
 <section class="apartado" id="Servicios">
     Servicios
 </section>
+
 <?php render("footer"); ?>

@@ -4,7 +4,7 @@ namespace App\Models\User\Pago;
 
 use App\Models\Model;
 
-class Pago extends Model 
+class InfPago extends Model 
 {
     protected int $ID_InfoPago;
     protected int $ID_Paciente;
@@ -14,7 +14,8 @@ class Pago extends Model
     protected string $Vencimiento_Cuenta;
     protected float $Saldo;
 
-    
+	
+
 	/**
 	 * @return int
 	 */

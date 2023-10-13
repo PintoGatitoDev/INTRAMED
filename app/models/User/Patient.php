@@ -3,6 +3,8 @@
 namespace App\Models\User;
 
 use App\Models\User\User;
+use App\Models\User\DatosMedicos\DatosMedicos;
+use App\Models\User\Pago\InfPago;
 
 class Patient extends User
 {
@@ -10,6 +12,8 @@ class Patient extends User
     protected string $Estado_Civil;
     protected string $NSS;
 	protected int $numero_Emergencia;
+	protected  $DatosM;
+	protected $InfPago;
 
 
 	/**
@@ -73,6 +77,40 @@ class Patient extends User
 	 */
 	public function setNumero_Emergencia(int $numero_Emergencia): self {
 		$this->numero_Emergencia = $numero_Emergencia;
+		return $this;
+	}
+
+	
+
+	/**
+	 * @return mixed
+	 */
+	public function getDatosM() {
+		return $this->DatosM;
+	}
+	
+	/**
+	 * @param mixed $DatosM 
+	 * @return self
+	 */
+	public function setDatosM($DatosM): self {
+		$this->DatosM = $DatosM;
+		return $this;
+	}
+	
+	/**
+	 * @return mixed
+	 */
+	public function getInfPago() {
+		return $this->InfPago;
+	}
+	
+	/**
+	 * @param mixed $InfPago 
+	 * @return self
+	 */
+	public function setInfPago($InfPago): self {
+		$this->InfPago = $InfPago;
 		return $this;
 	}
 }

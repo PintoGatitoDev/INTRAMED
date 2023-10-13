@@ -63,8 +63,7 @@ class Auth_Manager extends Model
 
         $bd = new proxy_bd();
 
-        $bd->registerMedic($medic);
-        return true;
+        return $bd->registerMedic($medic);
     }
 
     public function registerPatient($email, $password, $nombre, $apellidoPaterno, $apellidoMaterno, 
@@ -89,27 +88,26 @@ class Auth_Manager extends Model
         $patient->setNumero_Emergencia($numero_Emergencia);
 
         $bd = new proxy_bd();
-        $bd->registerPatient($patient);
-        return true;
+        return $bd->registerPatient($patient); 
     }
 
-    public function loginUser($email,$password) : bool
+    public function loginUser($email,$password) : int
     {
         $bd = new proxy_bd();
 
         $user = $bd->queryOneUser($email);
         if(!$user)
         {
-            return false;
+            return 1;
         }
         if (Password::verify($password, $user['Password'])) {
             session_start();
             $_SESSION['ID_User'] = $user['ID_Usuario'];
             $_SESSION['Email'] = $user['Email'];
             $_SESSION['Rol'] = $user['Rol'];
-            return true;
+            return 0;
         }
-        return false;
+        return 2;
     }
 
     public function logout() : void

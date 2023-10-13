@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use PhpParser\Node\Stmt\Return_;
+use Leaf\Helpers\Password;
 use App\Models\User\Auth_Manager;
 
 class AutenticacionController extends Controller
@@ -10,45 +11,71 @@ class AutenticacionController extends Controller
     /* Views */
     public function login_view()
     {
-        render("Users/login");
+        if(app()->request->get('error'))
+        {
+            $error = app()->request->get('error');
+            return render("/Users/login",[
+                "error" =>$error
+            ]);
+        }
+        render("/Users/login");
     }
 
     public function register_view()
     {
         session_start();
-        render('Users/selectRol');
+        render('/Users/selectRol');
     }
 
     public function register_Admin_View()
     {
         session_start();
-        render('Users/registerAdmin');
+        if(app()->request->get('error'))
+        {
+            $error = app()->request->get('error');
+            return render("/Users/registerAdmin",[
+                "error" => $error
+            ]);
+        }
+        render('/Users/registerAdmin');
     }
 
     public function register_Medic_View()
     {
         session_start();
-        render('Users/registerMedic');
+        if(app()->request->get('error'))
+        {
+            $error = app()->request->get('error');
+            return render("/Users/registerMedic",[
+                "error" => $error
+            ]);
+        }
+        render('/Users/registerMedic');
     }
     public function register_Patient_View()
     {
         session_start();
-        render('Users/registerPatient');
+        if(app()->request->get('error'))
+        {
+            $error = app()->request->get('error');
+            return render("/Users/registerPatient",[
+                "error" => $error
+            ]);
+        }
+        render('/Users/registerPatient');
     }
 
     /* Inicio de sesion */
     public function login()
     {
-        if ($this->request->getMethod() === 'POST') {
             $email = app()->request->get('email');
             $password = app()->request->get('password');
             $g_autenticacion = new Auth_Manager();
             $resultLogin = $g_autenticacion->loginUser($email, $password);
-            if (!$resultLogin) {
-                return redirect('login?error=1');
+            if ($resultLogin != 0) {
+                return redirect('/login?error=' . $resultLogin);
             }
-            return redirect('home');
-        }
+            return redirect('/home');
     }
 
     /* Registro */
@@ -57,10 +84,10 @@ class AutenticacionController extends Controller
         $rol = app()->request->get('rol');
         if ($rol == "") {
             $error = "Rol no valido o no seleccionado";
-            return redirect("registerRol");
+            return redirect("/registerRol");
         }
 
-        $direccion = "register" . $rol;
+        $direccion = "/register" . $rol;
         return redirect($direccion);
     }
 
@@ -79,7 +106,7 @@ class AutenticacionController extends Controller
         $genero = app()->request->get('genero');
         $subrol = app()->request->get('Subrol');
 
-        $ifFoto = "public/assets/img/Admins/" . $foto['name'];
+        $ifFoto = "public/assets/img/Admins/" . date("Y-m-d-H-i-s") . "_". $nombre . $apellidoPaterno . $apellidoMaterno . ".png";
 
         $g_Autenticacion = new Auth_Manager();
         if (
@@ -96,11 +123,13 @@ class AutenticacionController extends Controller
                 $fecha_Nac,
                 $genero,
                 $subrol
-            )
+            ) == 0
         ) {
-            move_uploaded_file($foto['tmp_name'], $ifFoto);
-            return redirect("home");
+            move_uploaded_file($foto['tmp_name'] , $ifFoto);
+            redirect("/login");
         }
+
+        redirect("/registerAdmin?error=1");
     }
 
     public function registerMedicBD()
@@ -121,7 +150,7 @@ class AutenticacionController extends Controller
         $experiencia_Medic = app()->request->get('Experiencia_Medica');
         $area_Trabajo = app()->request->get('area_trabajo');
 
-        $ifFoto = "public/assets/img/Medics/" . $foto['name'];
+        $ifFoto = "public/assets/img/Medics/" . date("Y-m-d-H-i-s") . "_". $nombre . $apellidoPaterno . $apellidoMaterno . ".png";
 
         $g_Autenticacion = new Auth_Manager();
         if (
@@ -141,12 +170,12 @@ class AutenticacionController extends Controller
                 $nivel_Estudio,
                 $experiencia_Medic,
                 $area_Trabajo
-            )
+            ) == 0
         ){
             move_uploaded_file($foto['tmp_name'], $ifFoto);
-            return redirect("home");
+            return redirect("/login");
         }
-
+        redirect("/registerMedic?error=1");
     }
 
     public function registerPatientBD()
@@ -166,7 +195,7 @@ class AutenticacionController extends Controller
         $NSS = app()->request->get('NSS');
         $numero_Emergencia = app()->request->get('Num_Emergencia');
 
-        $ifFoto = "public/assets/img/Patents/" . $foto['name'];
+        $ifFoto = "public/assets/img/Patents/" . date("Y-m-d-H-i-s") . "_". $nombre . $apellidoPaterno . $apellidoMaterno . ".png";
 
 
 
@@ -187,11 +216,12 @@ class AutenticacionController extends Controller
                 $estado_civil,
                 $NSS,
                 $numero_Emergencia
-            )
+            ) == 0
         ) {
             move_uploaded_file($foto['tmp_name'], $ifFoto);
-            return redirect("home");
+            return redirect("/login");
         }
+        redirect("/registerPatient?error=1");
     }
 
     /* Cerrar Sesion */
@@ -199,6 +229,6 @@ class AutenticacionController extends Controller
     {
         $g_Autenticacion = new Auth_Manager();
         $g_Autenticacion->logout();
-        redirect('login');
+        redirect('/login');
     }
 }

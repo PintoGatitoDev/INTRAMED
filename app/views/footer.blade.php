@@ -1,13 +1,12 @@
-</main>
+</section>
 <footer>
+    <h2>redes Sociales</h2>
     <article id="redes">
-        <a href="#">facebook</a>
-        <a href="#">twitter</a>
-        <a href="#">instagram</a>
+    <a href="#" class="fa fa-facebook"></a>
+    <a href="#" class="fa fa-twitter"></a>
+    <a href="#" class="fa fa-instagram"></a>
     </article>
-    <script <script src="{{assets('js/app.js')}}"></script>
 </footer>
-
 </body>
-
+<script <script src="/{{assets('js/app.js')}}"></script>
 </html>

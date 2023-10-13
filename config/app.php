@@ -43,7 +43,7 @@ return [
     | You might want to turn this off in production.
     |
     */
-    'debug' => _env('APP_DEBUG', false),
+    'debug' => _env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------

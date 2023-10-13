@@ -15,8 +15,25 @@
             <option value="Operaciones">Operaciones</option>
             <option value="Recursos">Recursos Humanos</option>
         </select>
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Registro">
     </form>
 </section>
 
+
+
+<?php
+if (isset($error)) {
+    ?>
+    <div class="modal">
+        <div class="modal_contenido">
+            <h2>Ocurrio un error durante el registro</h2>
+            <?php
+                echo "<p>-El correo ya a sido registrado</p>";
+            ?>
+            <button class="boton_negro btn_error">aceptar</button>
+        </div>
+    </div>
+<?php
+}
+?>
 <?php render('footer'); ?>

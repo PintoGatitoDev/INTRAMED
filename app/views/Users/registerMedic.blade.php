@@ -8,12 +8,12 @@
         <?php render("Users/formregister");?>
         <label for="Subrol">Subrol</label>
         <select name="Subrol" id="Subrol">
-            <option value="" default>---Subrol---</option>
+        <option value="" default>---Subrol---</option>
             <option value="General">General</option>
-            <option value="Financiero">Investigador</option>
-            <option value="Clinicos">Docente</option>
-            <option value="Operaciones">Urgencias</option>
-            <option value="Recursos">Consulta</option>
+            <option value="Investigador">Investigador</option>
+            <option value="Docente">Docente</option>
+            <option value="Urgencias">Urgencias</option>
+            <option value="Consulta">Consulta</option>
         </select>
         <label for="Nivel_Estudio">Nivel de estudio:</label>
         <input type="text" id="Nivel_Estudio" name="Nivel_Estudio" required>
@@ -49,8 +49,23 @@
             <option value="unidad_de_docencia">Unidad de Docencia</option>
             <option value="unidad_de_administracion">Unidad de Administración</option>
         </select>
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Registro">
     </form>
 </section>
 
+<?php
+if (isset($error)) {
+    ?>
+    <div class="modal">
+        <div class="modal_contenido">
+            <h2>Ocurrio un error durante el registro</h2>
+            <?php
+                echo "<p>-El correo ya a sido registrado</p>";
+            ?>
+            <button class="boton_negro btn_error">aceptar</button>
+        </div>
+    </div>
+<?php
+}
+?>
 <?php render('footer'); ?>

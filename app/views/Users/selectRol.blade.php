@@ -11,8 +11,10 @@
             <option value="Medic">Medico</option>
             <option value="Patient">Paciente</option>
         </select>
-        <input type="submit" value="Continuar">
+        <input type="submit" value="Continuar" class="boton_negro">
     </form>
 </section>
+
+
 
 <?php render('footer'); ?>
