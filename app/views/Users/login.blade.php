@@ -2,7 +2,7 @@
 
 
 <section class="Contenido">
-    <form action="VerifiedLogin" method="post" class="formulario" id="Login">
+    <form action="VerifyLogin" method="post" class="formulario" id="Login">
         <h2>Iniciar Sesion</h2>
         <label for="email">Correo electrónico</label>
         <input type="email" name="email" id="email" placeholder="example@example.com">

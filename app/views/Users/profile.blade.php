@@ -46,7 +46,7 @@
 
 
     <section id="apartados">
-        <div id="contenedor1" style="display: none;">
+        <div id="contenedor1" style="display: block;">
             <?php 
             render('Users/Data/DatosPersonales',[
                     "id_user" => $id_user,
@@ -85,7 +85,7 @@
             ]);?>
         </div>
 
-        <div id="contenedor4" style="display: block;">
+        <div id="contenedor4" style="display: none;">
             <?php render('Users/Data/DatosPago',[
                 "id_paciente" => $id_paciente,
                 "Pagos" => $Pagos

@@ -24,6 +24,10 @@ botones.forEach(function (boton) {
   });
 });
 
+
+
+
+
 if (document.querySelector('#carrusel')) {
   setInterval('funcionEjecutar("siguiente")', 5000);
 }
@@ -117,15 +121,6 @@ function EditarContacto(evento) {
   });
 }
 
-
-
-function hideButton() {
-  // Obtén el elemento `button`
-  var button = document.querySelector(".modal");
-  // Establece la propiedad `display` del elemento `button` en `none` para ocultarlo
-  button.style.display = "none";
-}
-
 //editpersonales
 var botoneditarP = document.querySelector("#editpersonales");
 var CancelarP = document.querySelector("#cancelarP");
@@ -137,11 +132,19 @@ CancelarP.addEventListener("click", EditarPersonales);
 var botoneditarC = document.querySelector("#editcontacto");
 var CancelarC = document.querySelector("#cancelarC");
 
-
-
 botoneditarC.addEventListener("click", EditarContacto);
 CancelarC.addEventListener("click", EditarContacto);
 
 
 // Agrega un oyente de eventos al elemento `button`
-document.querySelector(".btn_error").addEventListener("click", hideButton);
+document.querySelector(".btn_error").addEventListener("click", function hideButton() {
+  // Obtén el elemento `button`
+  var button = document.querySelector(".modal");
+  // Establece la propiedad `display` del elemento `button` en `none` para ocultarlo
+  button.style.display = "none";
+});
+
+
+
+
+

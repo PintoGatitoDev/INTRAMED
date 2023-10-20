@@ -59,10 +59,7 @@ class User_Manager extends Model
 
         $bd = new proxy_bd();
         
-        if($bd->addMethond($infPago))
-            return true;
-
-        return false;
+        return $bd->addMethond($infPago);
     }
 
     public function addInfMedic($id_paciente,$peso,$altura,$grupo_sanguineo,$presion_corporal,

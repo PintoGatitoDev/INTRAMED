@@ -137,7 +137,7 @@ class UserController extends Controller
             $vencimiento,
             $saldo
         );
-        redirect("/User/profile");
+        return redirect("/User/profile");
     }
 
     public function addInfMedic($id)
@@ -155,7 +155,7 @@ class UserController extends Controller
 
         $u_Manager->addInfMedic($id_paciente,$peso,$altura,$grupo_sanguineo,$presion_corporal,$nivel_glucosa,$incapacidades,$notas);
 
-        redirect("/User/profile");
+        return redirect("/User/profile");
     }
 
     public function editInfPersonal($id)
@@ -183,7 +183,7 @@ class UserController extends Controller
             $subrol = app()->request->get('Subrol');
             $u_manager->updateDatPersonalAdmin($id, $nombre, $apellidoPaterno, $apellidoMaterno, $fecha_Nac, $subrol);
         }
-        redirect("/User/profile");
+        return redirect("/User/profile");
     }
 
     public  function editContacto($id)
@@ -201,7 +201,7 @@ class UserController extends Controller
         {
             $u_manager->updateDatContactoUser($id,$Telefono,$Direccion);
         }
-        redirect("/User/profile");
+        return redirect("/User/profile");
     }
     /* DELETE */
 
@@ -218,6 +218,6 @@ class UserController extends Controller
 
         $u_manager->delInfMedic($id_info);
 
-        redirect ("/User/profile");
+        return redirect ("/User/profile");
     }
 }
