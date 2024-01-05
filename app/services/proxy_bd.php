@@ -7,6 +7,8 @@ use App\Models\User\Medic;
 use App\Models\User\Patient;
 use App\Models\User\Pago\InfPago;
 use App\Models\User\DatosMedicos\DatosMedicos;
+use App\Models\Servicio\Servicio;
+use App\Models\Citas\Cita;
 
 class proxy_bd
 {
@@ -68,7 +70,7 @@ class proxy_bd
         if ($result == 0) {
             $user = $this->queryOneUser($Admin->getEmail());
 
-            $insert = "INSERT INTO Administrador (ID_Usuario,Subrol,PassSeguridad)
+            $insert = "INSERT INTO Administrador (ID_User,Subrol,PassSeguridad)
             VALUES (" . $user['ID_Usuario'] . ",'" . $Admin->getSubrol() . "','" . $Admin->getPassSecurity() . "')";
             $this->bd->query($insert);
             return 0;
@@ -96,8 +98,8 @@ class proxy_bd
 
         if ($result == 0) {
             $user = $this->queryOneUser($medic->getEmail());
-            $insert = "INSERT INTO Medico (ID_Usuario,Subrol,Nivel_Estudio,Experiencia_Medica,Area_Trabajo)
-            VALUES (" . $user['ID_Usuario'] . ",'" . $medic->getSubrol() . "','" . $medic->getNivel_Estudio() .
+            $insert = "INSERT INTO Medico (ID_User,Subrol,Nivel_Estudio,Experiencia_Medica,Area_Trabajo)
+            VALUES (" . $user['ID_User'] . ",'" . $medic->getSubrol() . "','" . $medic->getNivel_Estudio() .
                 "','" . $medic->getExperiencia_Medic() . "','" . $medic->getArea_Trabajo() . "')";
             $this->bd->query($insert);
             return 0;
@@ -125,8 +127,8 @@ class proxy_bd
 
         if ($result == 0) {
             $user = $this->queryOneUser($patient->getEmail());
-            $insert = "INSERT INTO Paciente (ID_Usuario,Estado_Civil,NSS,Numero_Emergencia)
-            VALUES (" . $user['ID_Usuario'] . ",'" . $patient->getEstado_Civil() . "','" .
+            $insert = "INSERT INTO Paciente (ID_User,Estado_Civil,NSS,Numero_Emergencia)
+            VALUES (" . $user['ID_User'] . ",'" . $patient->getEstado_Civil() . "','" .
                 $patient->getNSS() . "','" . $patient->getNumero_Emergencia() . "')";
             $this->bd->query($insert);
             return 0;
@@ -154,7 +156,15 @@ class proxy_bd
         return $this->bd->query($insert);
     }
 
-    /* SELECTS */
+    public function newCita(Cita $cita)
+    {
+        $insert = "INSERT INTO Cita (ID_Servicio,ID_Paciente,ID_Medico,Fecha,Hora)
+        VALUES (" . $cita->getId_Servicio() . "," . $cita->getId_Paciente() ."," . $cita->getId_Medico() . ",'" . 
+        $cita->getFecha() . "','" . $cita ->getHora() .  "')";
+        return $this->bd->query($insert);
+    }
+
+    /*----------------------------------- SELECTS -----------------------------------*/
 
     public function queryPatient(int $id_user): Patient
     {
@@ -163,7 +173,7 @@ class proxy_bd
         Paciente.Estado_Civil,
         Paciente.NSS,
         Paciente.Numero_Emergencia,
-        User.ID_Usuario,
+        User.ID_User,
         User.Email,
         User.Password,
         User.Nombre,
@@ -179,15 +189,16 @@ class proxy_bd
         User.Genero
       FROM
         User
-      INNER JOIN Paciente ON User.ID_Usuario = Paciente.ID_Usuario
+      INNER JOIN Paciente ON User.ID_User = Paciente.ID_User
       WHERE
-        User.ID_Usuario = " . $id_user . ";";
+        User.ID_User = " . $id_user . ";";
+        
 
         $result = $this->bd->query($query);
         $array = mysqli_fetch_assoc($result);
         $patient = new Patient();
         $patient->setId_patient($array["ID_Paciente"]);
-        $patient->setId_user($array["ID_Usuario"]);
+        $patient->setId_user($array["ID_User"]);
         $patient->setEmail($array["Email"]);
         $patient->setNombre($array["Nombre"]);
         $patient->setApellido_p($array["Apellido_P"]);
@@ -215,7 +226,7 @@ class proxy_bd
         Medico.Nivel_Estudio,
         Medico.Experiencia_Medica,
         Medico.Area_Trabajo,
-        User.ID_Usuario,
+        User.ID_User,
         User.Email,
         User.Password,
         User.Nombre,
@@ -231,15 +242,15 @@ class proxy_bd
         User.Genero
       FROM
         User
-      INNER JOIN Medico ON User.ID_Usuario = Medico.ID_Usuario
+      INNER JOIN Medico ON User.ID_User = Medico.ID_User
       WHERE
-        User.ID_Usuario = " . $id_user . ";";
+        User.ID_User = " . $id_user;
 
         $result = $this->bd->query($query);
         $array = mysqli_fetch_assoc($result);
         $medic = new Medic();
         $medic->setId_Medic($array["ID_Medico"]);
-        $medic->setId_user($array["ID_Usuario"]);
+        $medic->setId_user($array["ID_User"]);
         $medic->setEmail($array["Email"]);
         $medic->setNombre($array["Nombre"]);
         $medic->setApellido_p($array["Apellido_P"]);
@@ -378,6 +389,127 @@ class proxy_bd
         return $infMedic;
     }
 
+    public function queryServicios() : array
+    {
+        $query = 'SELECT * FROM servicio';
+
+        $result = $this->bd->query($query);
+        $j = 0;
+        $arrayServicios = array();
+        while ($resultServicios = mysqli_fetch_assoc($result)) {
+            $servicio = new Servicio();
+            $servicio->setID_Servicio($resultServicios['ID_Servicio']);
+            $servicio->setNombre($resultServicios['Nombre']);
+            $servicio->setDescripcion($resultServicios["Descripcion"]);
+            $servicio->setCosto($resultServicios["Costo"]);
+            $arrayServicios[$j] = $servicio;
+            $j++;
+        }
+        return $arrayServicios;
+    }
+
+    public function queryCitasReservadas($fecha) : array
+    {
+        $query = "SELECT Fecha,Hora FROM cita WHERE Fecha = '" . $fecha .  "'";
+        $result = $this->bd->query($query);
+        $arrayCitasReservadas = [];
+        $j=0;
+        while($resultCitas = mysqli_fetch_assoc($result))
+        {
+            $arrayCitasReservadas[$j] = $resultCitas;
+            $j++;
+        }
+
+        return $arrayCitasReservadas;
+    }
+
+    public function queryMisCitas(Patient $paciente) : array
+    {
+        $query = "SELECT * FROM cita WHERE ID_Paciente = " . $paciente->getId_patient();
+
+        $result = $this->bd->query($query);
+        $arrayMisCitas = array();
+        $j = 0;
+        while($resultCitas = mysqli_fetch_assoc($result))
+        {
+            $cita = new Cita();
+            $cita->setId_Cita($resultCitas['ID_Cita']);
+            $cita->setId_Paciente($resultCitas['ID_Paciente']);
+            $cita->setId_Medico($resultCitas['ID_Medico']);
+            $cita->setFecha($resultCitas['Fecha']);
+            $cita->setHora($resultCitas['Hora']);
+            $arrayMisCitas[$j] = $cita;
+            $j++;
+        }
+        return $arrayMisCitas;
+    }
+
+    public function queryCita(Cita $cita)
+    {
+        $query = "SELECT Cita.*, CONCAT(User.Nombre, ' ', User.Apellido_P, ' ', User.Apellido_M) AS Nombre_Medico ,Paciente.ID_User AS IDUsuario
+        FROM Cita 
+        INNER JOIN Medico
+        ON Cita.ID_Medico = Medico.ID_Medico
+        INNER JOIN user
+        ON Medico.ID_User = user.ID_User
+        INNER JOIN paciente
+        ON paciente.ID_Paciente = Cita.ID_Paciente
+        WHERE ID_Cita = " . $cita->getId_Cita();
+        $result = $this->bd->query($query);
+        $cita = mysqli_fetch_assoc($result);
+
+        $query = "SELECT * FROM user WHERE ID_User = " . $cita['IDUsuario'];
+        $result = $this->bd->query($query);
+        $patient = mysqli_fetch_assoc($result);
+
+        $cita = array_merge($cita,$patient);
+
+        return $cita;
+    }
+
+    public function queryCitaPacientes(Medic $medico) : array
+    {
+        $query = "SELECT * FROM Cita WHERE ID_Medico = " . $medico->getId_Medic();
+        $result = $this->bd->query($query);
+
+        $arrayCitasPacientes = array();
+        $j = 0;
+        while($resultCitas = mysqli_fetch_assoc($result))
+        {
+            $cita = new Cita();
+            $cita->setId_Cita($resultCitas['ID_Cita']);
+            $cita->setId_Paciente($resultCitas['ID_Paciente']);
+            $cita->setId_Medico($resultCitas['ID_Medico']);
+            $cita->setFecha($resultCitas['Fecha']);
+            $cita->setHora($resultCitas['Hora']);
+            $arrayCitasPacientes[$j] = $cita;
+            $j++;
+        }
+        return $arrayCitasPacientes;
+    }
+
+    public function queryCitas() : array
+    {
+        $query = "SELECT * FROM cita ORDER BY Fecha";
+        $result = $this->bd->query($query);
+
+        $arrayCitas = array();
+        $j = 0;
+        while($resultCitas = mysqli_fetch_assoc($result))
+        {
+            $cita = new Cita();
+            $cita->setId_Cita($resultCitas['ID_Cita']);
+            $cita->setId_Paciente($resultCitas['ID_Paciente']);
+            $cita->setId_Medico($resultCitas['ID_Medico']);
+            $cita->setFecha($resultCitas['Fecha']);
+            $cita->setHora($resultCitas['Hora']);
+            $arrayCitas[$j] = $cita;
+            $j++;
+        }
+        return $arrayCitas;
+    }
+
+
     //Update
     public function updateUserPersonal($id_user,$nombre, $apellido_P, $apellido_M, $fecha_Nac)
     {
@@ -439,7 +571,16 @@ class proxy_bd
         return $this->bd->query($update);
     }
 
-    //Delete
+    public function updateEstadoCita(Cita $cita) : bool
+    {
+        $update = "UPDATE Cita 
+        SET Estado = '" . $cita->getEstado() . "'" .
+        "WHERE ID_Cita = " . $cita->getId_Cita();
+
+        return $this->bd->query($update);
+    }
+
+    /*----------------------- Delete -----------------------*/
 
     public function deleteUser(int $id_user): bool
     {

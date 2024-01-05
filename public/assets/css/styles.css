@@ -43,6 +43,12 @@ header {
     text-decoration: none;
 }
 
+ul.submenu {
+    display: none;
+  }
+  
+
+
 #Menu a:hover {
     background-color: rgb(134, 172, 255);
 }
@@ -350,7 +356,32 @@ main {
     border-radius: 10px;
 }
 
+.Cita
+{
+    display: inline-block;
+    height: 300px;
+    width: 95%;
+    margin: 10px;
+    background-color: #E3F2FF;
+    border-radius: 10px;
+    border: 10px solid #DAEDFF;
+}
 
+.Cita table
+{
+    width: 95%;
+}
+
+.Cita table .firt
+{
+    width: 80%;
+}
+
+
+.Cita table .second
+{
+    width: 15%;
+}
 
 
 

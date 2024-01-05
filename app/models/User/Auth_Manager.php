@@ -102,7 +102,7 @@ class Auth_Manager extends Model
         }
         if (Password::verify($password, $user['Password'])) {
             session_start();
-            $_SESSION['ID_User'] = $user['ID_Usuario'];
+            $_SESSION['ID_User'] = $user['ID_User'];
             $_SESSION['Email'] = $user['Email'];
             $_SESSION['Rol'] = $user['Rol'];
             return 0;

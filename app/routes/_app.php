@@ -2,6 +2,7 @@
 
 use \App\Controllers\IndexController;
 use \App\Controllers\AutenticacionController;
+use \App\Controllers\CitaController;
 
 
 app()->get('/', 'IndexController@index');
@@ -42,4 +43,18 @@ app()->group('/User', function () {
     app()->post('/{id}/addInfMedic', 'UserController@addInfMedic');
     app()->get('/InfMedic/{id_inf}', 'UserController@infMedicView');
 
+});
+
+//Citas Medicas
+app()->group("/Citas",function(){
+    app()->get("/prueba", "CitaController@prueba");
+    app()->get("/nueva", "CitaController@reservar_view");
+    app()->get("/reservar", "CitaController@reservar");
+    app()->get("/MisCitas","CitaController@MisCitas");
+    app()->get("/CPacientes", "CitaController@CitasPacientes");
+    app()->get("/Informe", "CitaController@InformeCitas");
+    app()->get("/Finalizar" , "CitaController@Finalizar");
+    app()->get("/{id_cita}","CitaController@Cita_View");
+
+    
 });

@@ -1,150 +1,103 @@
-var botones = document.querySelectorAll("#opcion a");
+const botones = document.querySelectorAll('#opcion a');
 
-
-botones.forEach(function (boton) {
-  boton.addEventListener("click", function CambiarSeccion(evento) {
-    evento.preventDefault();
-    var caja = evento.target;
-    document.querySelector("#contenedor1").setAttribute("style", "display: none;");
-    document.querySelector("#contenedor2").setAttribute("style", "display: none;");
-    var contenedor3 = document.querySelector("#contenedor3");
-    if(contenedor3 != null)
-    {
-      contenedor3.setAttribute("style", "display: none;");
-    }
-    var contenedor4 = document.querySelector("#contenedor4");
-    if(contenedor4 != null)
-    {
-      contenedor4.setAttribute("style", "display: none;");
-    }
-    var direccion = caja.getAttribute("href");
-    console.log(direccion);
-    document.querySelector("#" + direccion + "").setAttribute("style", "display: block;");
-
-  });
+botones.forEach(button => {
+  button.addEventListener('click', handleButtonClick);
 });
 
-
-
-
-
-if (document.querySelector('#carrusel')) {
-  setInterval('funcionEjecutar("siguiente")', 5000);
+function handleButtonClick(event) {
+  event.preventDefault();
+  const sectionId = event.target.getAttribute('href');
+  hideAllSections();
+  document.querySelector(`#${sectionId}`).style.display = 'block';
 }
 
+function hideAllSections() {
+  const contenedores = [
+    document.querySelector('#contenedor1'),
+    document.querySelector('#contenedor2'),
+    document.querySelector('#contenedor3'),
+    document.querySelector('#contenedor4'),
+  ];
+  contenedores.forEach(contenedor => contenedor.style.display = 'none');
+}
 
-function funcionEjecutar(side) {
-  console.log("aqui");
-  let parentTarget = document.getElementById('carrusel');
-  let elements = parentTarget.getElementsByTagName('img');
-  let curElement, siguienteElement;
-  console.log(elements.length);
-  for (var i = 0; i < elements.length; i++) {
+document.addEventListener('DOMContentLoaded', function() {
+  const carrusel = document.getElementById('carrusel');
+  if (carrusel) {
+    setInterval(() => handleCarouselTransition('siguiente'), 5000);
+  }
+});
 
-    if (elements[i].style.display == "block") {
-      curElement = i;
+function handleCarouselTransition(side) {
+  const carrusel = document.getElementById('carrusel');
+  const images = carrusel.getElementsByTagName('img');
+  let currentImageIndex;
+
+  for (let i = 0; i < images.length; i++) {
+    if (images[i].style.display === 'block') {
+      currentImageIndex = i;
       break;
     }
   }
-  if (side == 'anterior' || side == 'siguiente') {
 
-    if (side == "anterior") {
-      siguienteElement = (curElement == 0) ? elements.length - 1 : curElement - 1;
+  let nextImageIndex;
+
+  if (side === 'anterior' || side === 'siguiente') {
+    if (side === 'anterior') {
+      nextImageIndex = (currentImageIndex === 0) ? images.length - 1 : currentImageIndex - 1;
     } else {
-      siguienteElement = (curElement == elements.length - 1) ? 0 : curElement + 1;
+      nextImageIndex = (currentImageIndex === images.length - 1) ? 0 : currentImageIndex + 1;
     }
   } else {
-    siguienteElement = side;
-    side = (curElement > siguienteElement) ? 'anterior' : 'siguiente';
-
+    nextImageIndex = side;
+    side = (currentImageIndex > nextImageIndex) ? 'anterior' : 'siguiente';
   }
 
-  //PUNTOS INFERIORES
-  elements[curElement].style.display = "none";
-  elements[siguienteElement].style.display = "block";
+  hideAllImages();
+  images[nextImageIndex].style.display = 'block';
 }
 
-function EditarPersonales(evento) {
-  var inputEditables = document.querySelectorAll(".editP");
-  evento.preventDefault();
-  console.log("a");
-  var botonEditar = evento.target;
-  inputEditables.forEach(function (input) {
-    input.disabled = !input.disabled;
-
-  });
-  var e = evento.target;
-  var botonesinv = document.querySelectorAll(".binvisible");
-  var invisibles = document.querySelectorAll(".invisible");
-  
-  var botonesvis = document.querySelectorAll(".bvisible");
-  var visibles = document.querySelectorAll(".visible");
-
-  botonesvis.forEach(function (boton){
-    boton.setAttribute("class","binvisible");
-  });
-
-  botonesinv.forEach(function (boton){
-    boton.setAttribute("class","bvisible");
-  });
-
-  invisibles.forEach(function (boton){
-    boton.setAttribute("class","visible");
-  });
-
-  visibles.forEach(function (boton){
-    boton.setAttribute("class","invisible");
-  });
-
+function hideAllImages() {
+  const images = document.querySelectorAll('#carrusel img');
+  images.forEach(image => image.style.display = 'none');
 }
 
+const editPersonalesButton = document.querySelector('#editpersonales');
+const cancelPersonalesButton = document.querySelector('#cancelarP');
 
-function EditarContacto(evento) {
-  var inputEditables = document.querySelectorAll(".editC");
-  evento.preventDefault();
-  console.log("a");
-  var botonEditar = evento.target;
-  inputEditables.forEach(function (input) {
-    input.disabled = !input.disabled;
+const editContactoButton = document.querySelector('#editcontacto');
+const cancelContactoButton = document.querySelector('#cancelarC');
 
-  });
+const editables = document.querySelectorAll('.editP, .editC');
 
-  var e = evento.target;
-  var botonesinv = document.querySelectorAll(".binvisible");
-  var botonesvis = document.querySelectorAll(".bvisible");
+const visibleButtons = document.querySelectorAll('.bvisible');
+const invisibleButtons = document.querySelectorAll('.binvisible');
 
-  botonesvis.forEach(function (boton){
-    boton.setAttribute("class","binvisible");
-  });
-  botonesinv.forEach(function (boton){
-    boton.setAttribute("class","bvisible");
-  });
+const visibleElements = document.querySelectorAll('.visible');
+const invisibleElements = document.querySelectorAll('.invisible');
+
+const errorButton = document.querySelector('.btn_error');
+errorButton.addEventListener("click", hideErrorButton);
+
+editPersonalesButton.addEventListener('click', toggleEditableInputs);
+cancelPersonalesButton.addEventListener('click', toggleEditableInputs);
+
+editContactoButton.addEventListener('click', toggleEditableInputs);
+cancelContactoButton.addEventListener('click', toggleEditableInputs);
+
+function toggleEditableInputs(event) {
+  event.preventDefault();
+
+  editables.forEach(editable => editable.disabled = !editable.disabled);
+
+  visibleButtons.forEach(button => button.classList.toggle('bvisible'));
+  invisibleButtons.forEach(button => button.classList.toggle('binvisible'));
+
+  visibleElements.forEach(element => element.classList.toggle('visible'));
+  invisibleElements.forEach(element => element.classList.toggle('invisible'));
 }
 
-//editpersonales
-var botoneditarP = document.querySelector("#editpersonales");
-var CancelarP = document.querySelector("#cancelarP");
-
-botoneditarP.addEventListener("click", EditarPersonales);
-CancelarP.addEventListener("click", EditarPersonales);
-
-//editContacto
-var botoneditarC = document.querySelector("#editcontacto");
-var CancelarC = document.querySelector("#cancelarC");
-
-botoneditarC.addEventListener("click", EditarContacto);
-CancelarC.addEventListener("click", EditarContacto);
-
-
-// Agrega un oyente de eventos al elemento `button`
-document.querySelector(".btn_error").addEventListener("click", function hideButton() {
-  // Obtén el elemento `button`
-  var button = document.querySelector(".modal");
-  // Establece la propiedad `display` del elemento `button` en `none` para ocultarlo
-  button.style.display = "none";
-});
-
-
-
-
-
+function hideErrorButton() {
+  const modal = document.querySelector('.modal');
+  modal.style.display = 'none';
+}
