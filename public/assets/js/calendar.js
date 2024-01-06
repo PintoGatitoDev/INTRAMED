@@ -28,11 +28,25 @@ function createCalendar(elem, year, month) {
       while (d.getMonth() == mon) {
         if(d.getDate() < 10)
         {
-          table += '<td class="Dis" id="' + d.getFullYear() + "-" + d.getMonth() + "-0" + d.getDate() + '">' + d.getDate() + '</td>';
+          if(d.getMonth() < 10)
+          {
+            table += '<td class="Dis" id="' + d.getFullYear() + "-0" + (d.getMonth() + 1) + "-0" + d.getDate() + '">' + d.getDate() + '</td>';
+          }
+          else
+          {
+            table += '<td class="Dis" id="' + d.getFullYear() + "-" + d.getMonth() + "-0" + d.getDate() + '">' + d.getDate() + '</td>';
+          }
         }
         else
         {
-          table += '<td class="Dis" id="' + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + '">' + d.getDate() + '</td>';
+          if(d.getMonth() < 10)
+          {
+            table += '<td class="Dis" id="' + d.getFullYear() + "-0" + d.getMonth() + "-" + d.getDate() + '">' + d.getDate() + '</td>';
+          }
+          else
+          {
+            table += '<td class="Dis" id="' + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + '">' + d.getDate() + '</td>';
+          }
         }
         
         if (getDay(d) % 7 == 6) { // domingo, último dia de la semana --> nueva línea
@@ -130,27 +144,60 @@ function createCalendar(elem, year, month) {
     async function asignarCitas() {
       var boton = event.target;
 
-      console.log(boton.id);
+      var fechaElegida = document.querySelector("#fecha");
+      fecha.setAttribute("value", boton.id);
 
-    /*const response = await fetch("http://localhost:8080/Citas/prueba?fecha=" fecha);
-    try {
-      const citas = await response.json();
+    fetch("http://localhost/Citas/prueba?fecha=" + boton.id)
+    .then(response => response.json())
+    .then(data => aCitas(data));
+  }
 
-    } catch (error) {
-      console.error("Error parsing JSON:", error);
-    }*/
+  function aCitas(data)
+  {
+    const horasCita = ["08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30",
+                  "14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30"];
+    const horas = Object.keys(data);
+    
+    var CitasHora = [];
+    var j=0;
+    for (const hora of horas) {
+      //console.log(data[hora]["Hora"]);
+      CitasHora[j] = data[hora]["Hora"];
+      j++;
+    }
+
+    CitasHora.forEach(function(cita){
+      horasCita.splice(horasCita.indexOf(cita), 1);
+    });
+
+    var selectorHora = document.querySelector("#horario");
+
+    selectorHora.innerHTML = "";
+
+    horasCita.forEach(function(hora)
+      {
+        var option = document.createElement("option");
+        option.innerHTML = hora;
+        option.setAttribute("value",hora);
+        selectorHora.appendChild(option);
+      });
   }
 
     var FechaActual = new Date();
     console.log(FechaActual);
     var mes = FechaActual.getMonth() + 1;
+    console.log(mes);
     var anio = FechaActual.getFullYear();
+    var meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    Emes.innerHTML = meses[mes-1];
+
 
     createCalendar(cal_body, anio, mes);
 
-    
-    
-
+    var diaCalendario = document.querySelectorAll(".Dis");
+      diaCalendario.forEach(dia => {
+        dia.addEventListener("click", asignarCitas);
+      });
     Pmes.innerHTML = mes;
     Panio.innerHTML = anio;
 

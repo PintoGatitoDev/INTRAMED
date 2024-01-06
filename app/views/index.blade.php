@@ -1,4 +1,4 @@
-<?php render("header"); ?>
+{{render("header");}}
 
 
 <section class="principal" id="Bienvenida">
@@ -16,4 +16,4 @@
     Servicios
 </section>
 
-<?php render("footer"); ?>
+{{ render("footer"); }}

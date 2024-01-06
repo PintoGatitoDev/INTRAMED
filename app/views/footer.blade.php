@@ -8,5 +8,4 @@
     </article>
 </footer>
 </body>
-<script src="/{{assets('js/app.js')}}">
 </html>
