@@ -1,13 +1,9 @@
-body {
-    padding: 0;
-    margin: 0;
+body
+{
+	font-family: 'Roboto', sans-serif;
 }
+
 #Logo
 {
 	width: 200px;
-}
-
-#Banner
-{
-	text-align: center;
 }

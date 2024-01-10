@@ -307,7 +307,7 @@ class proxy_bd {
 		return $admin;
 	}
 
-	public function queryOneUser(string $email) {
+	public function queryOneUser(string $email): ?array {
 		$query = "SELECT * FROM user WHERE Email='" . $email . "'";
 		$result = $this->bd->query($query);
 		$user = mysqli_fetch_assoc($result);

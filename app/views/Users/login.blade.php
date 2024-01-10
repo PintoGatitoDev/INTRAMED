@@ -1,8 +1,8 @@
-<?php render('header'); ?>
+<?php render('header');?>
 
 
 <section class="Contenido">
-    <form action="VerifyLogin" method="post" class="formulario" id="Login">
+    <form action="/Auth/login" method="post" class="formulario" id="Login">
         <h2>Iniciar Sesion</h2>
         <label for="email">Correo electrónico</label>
         <input type="email" name="email" id="email" placeholder="example@example.com">
@@ -14,18 +14,17 @@
 
 <?php
 if (isset($error)) {
-    ?>
+	?>
     <div class="modal">
         <div class="modal_contenido">
             <h2>Ocurrio un error durante el inicio de sesión</h2>
             <?php
-            if ($error == 1) {
-                echo "<p>-El usuario no está registrado</p>";
-            }
-            else {
-                echo "<p>-La contraseña es incorrecta</p>";
-            }
-            ?>
+if ($error == 1) {
+		echo "<p>-El usuario no está registrado</p>";
+	} else {
+		echo "<p>-La contraseña es incorrecta</p>";
+	}
+	?>
             <button class="boton_negro btn_error">aceptar</button>
         </div>
     </div>
@@ -33,4 +32,4 @@ if (isset($error)) {
 }
 ?>
 
-<?php render('footer'); ?>
+<?php render('footer');?>
