@@ -40,7 +40,7 @@ app()->group('/User', function () {
 
 //Citas Medicas
 app()->group("/Citas",function(){
-    app()->get("/prueba", "CitaController@prueba");
+    
     
     app()->get("/reservar", "CitaController@reservar");
     app()->get("/MisCitas","CitaController@MisCitas");

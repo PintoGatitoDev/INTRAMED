@@ -14,4 +14,5 @@ app()->group("/auth", function () {
 //Citas
 app()->group("/citas", function () {
 	app()->get("/reservar", "CitaController@reservar_view");
+	app()->get("/porDia", "CitaController@CitasPorDia");
 });

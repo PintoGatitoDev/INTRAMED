@@ -13,3 +13,12 @@ body
 	display: inline-block;
 	width: 40%;
 }
+
+
+.calendar
+{
+	display: inline-block;
+	border-collapse: collapse;
+	width: 50%;
+	background-color: aliceblue;
+}

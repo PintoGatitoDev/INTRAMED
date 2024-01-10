@@ -143,13 +143,12 @@ function createCalendar(elem, year, month) {
 
     async function asignarCitas() {
       var boton = event.target;
-
+      
       var fechaElegida = document.querySelector("#fecha");
       fecha.setAttribute("value", boton.id);
-
-    fetch("http://localhost/Citas/prueba?fecha=" + boton.id)
-    .then(response => response.json())
-    .then(data => aCitas(data));
+      fetch("http://localhost/citas/porDia?fecha=" + boton.id)
+      .then(response => response.json())
+      .then(data => aCitas(data));
   }
 
   function aCitas(data)

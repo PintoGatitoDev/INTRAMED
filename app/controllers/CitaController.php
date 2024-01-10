@@ -14,7 +14,11 @@ use Leaf\Http\Response;
 class CitaController extends Controller {
 	public function reservar_view() {
 		session_start();
-
+		
+		if(!session()->get("ID_User"))
+		{
+			return redirect("/");
+		}
 		$serv_Manager = new Servicio_Manager();
 		$servicios = $serv_Manager->queryServicios();
 
@@ -107,7 +111,7 @@ class CitaController extends Controller {
 		return redirect("/Citas/{$id_cita}");
 	}
 
-	public function prueba() {
+	public function CitasPorDia() {
 		$fecha = app()->request->get("fecha");
 
 		$C_Manager = new Cita_Manager();

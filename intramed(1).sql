@@ -31,8 +31,8 @@ DROP TABLE IF EXISTS `administrador`;
 CREATE TABLE IF NOT EXISTS `administrador` (
   `ID_Administrador` int NOT NULL,
   `ID_User` int NOT NULL,
-  `Subrol` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `PassSeguridad` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `Subrol` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `PassSeguridad` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`ID_Administrador`),
   KEY `_idx` (`ID_User`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `datos_medicos` (
   `Fecha_Historial` varchar(45) NOT NULL,
   PRIMARY KEY (`ID_Dato`),
   KEY `Datos_Paciente_idx` (`ID_Paciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `info_pago` (
   `Saldo` varchar(100) NOT NULL,
   PRIMARY KEY (`ID_InfoPago`),
   KEY `InfoP_Paciente_idx` (`ID_Paciente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `medico` (
   `Experiencia_Medica` varchar(45) NOT NULL,
   PRIMARY KEY (`ID_Medico`),
   KEY `Medico_User_idx` (`ID_User`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `paciente` (
   `Numero_Emergencia` varchar(10) NOT NULL,
   PRIMARY KEY (`ID_Paciente`),
   KEY `Paciente_User_idx` (`ID_User`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `paciente`
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Fecha_Nac` varchar(45) NOT NULL,
   `Genero` varchar(45) NOT NULL,
   PRIMARY KEY (`ID_User`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `user`

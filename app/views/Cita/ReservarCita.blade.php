@@ -2,17 +2,17 @@
 
 <link rel="stylesheet" href="/{{ assets('css/style.css') }}">
 
-<section class="contenedor">
-    <form action="/Citas/reservar" action="POST" class="formulario">
+<section class="w3-container w3-center">
+    <form action="/Citas/reservar" action="POST" class="formulario w3-card-4 w3-margin-top w3-padding">
         <h3>Reservar Nueva Cita</h3>
-        <label for="servicio">Elija el servicio al que desee reservar una cita:</label>
-        <select name="servicio" id="servicio">
+        <label for="servicio" class="w3-left">Elija el servicio al que desee reservar una cita:</label>
+        <select name="servicio" id="servicio" class="w3-select">
             @foreach($servicios as $servicio)
                 <option value="{{$servicio->getID_Servicio()}}">{{ $servicio->getNombre()}} - Costo {{ $servicio->getCosto()}} $</option>
             @endforeach
         </select>
 
-        <div id="calendar">
+        <div class="calendar">
             <table>
               <thead>
                 <tr>
@@ -36,7 +36,8 @@
             </table>
         </div>
 
-        <input type="text" name="fecha" id="fecha" value="" disabled>
+        <label for="fecha"  class="w3-left">Fecha seleccionada:</label>
+        <input type="text" name="fecha" id="fecha" value="" class="w3-input" disabled>
 
         <input type="text" name="id_medico" id="id_medico" value="1">
 
