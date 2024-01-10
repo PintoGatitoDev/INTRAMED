@@ -22,7 +22,7 @@ class AutenticacionController extends Controller {
 		$g_autenticacion = new Auth_Manager();
 		$resultLogin = $g_autenticacion->loginUser($email, $password);
 		if ($resultLogin != 0) {
-			return redirect('/login?error=' . $resultLogin);
+			return redirect('/auth/login?error=' . $resultLogin);
 		}
 		return redirect('/');
 	}

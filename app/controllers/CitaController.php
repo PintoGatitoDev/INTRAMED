@@ -19,7 +19,7 @@ class CitaController extends Controller {
 		$servicios = $serv_Manager->queryServicios();
 
 		$u_Manager = new User_Manager();
-		$paciente = $u_Manager->queryPatient($_SESSION['ID_User']);
+		$paciente = $u_Manager->queryPatient(session()->get("ID_User"));
 
 		if (app()->request->get('error')) {
 			$error = app()->request->get('error');

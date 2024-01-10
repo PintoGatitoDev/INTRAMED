@@ -97,7 +97,4 @@ function toggleEditableInputs(event) {
   invisibleElements.forEach(element => element.classList.toggle('invisible'));
 }
 
-function hideErrorButton() {
-  const modal = document.querySelector('.modal');
-  modal.style.display = 'none';
-}
+

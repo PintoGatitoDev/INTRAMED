@@ -22,7 +22,7 @@
                 <div class="w3-dropdown-hover">
                     <button class="w3-button">Citas</button>
                     <div class="w3-dropdown-content w3-bar-block w3-card-4">
-                        <a href="#" class="w3-bar-item w3-button w3-blue">Reservar Citas</a>
+                        <a href="/citas/reservar" class="w3-bar-item w3-button w3-blue">Reservar Citas</a>
                         <a href="#" class="w3-bar-item w3-button w3-blue">Mis Citas</a>
                         <a href="#" class="w3-bar-item w3-button w3-blue">Citas Con pacientes</a>
                         <a href="#" class="w3-bar-item w3-button w3-blue">Informe de Citas</a>
@@ -33,12 +33,12 @@
                     <button class="w3-button"><i class='fa fa-user' style="font-size: 20px;"></i></button>
                     <div class="w3-dropdown-content w3-bar-block w3-card-4">
                         <a href="#" class="w3-bar-item w3-button w3-blue">Perfil</a>
-                        <a href="/" class="w3-bar-item w3-button w3-right">Registrar</a>
-                         <a href="/Auth/logout" class="w3-bar-item w3-button w3-blue">Cerrar Sesión</a>
+                        <a href="#" class="w3-bar-item w3-button w3-right">Registrar</a>
+                         <a href="/auth/logout" class="w3-bar-item w3-button w3-blue">Cerrar Sesión</a>
                     </div>
                 </div>
             @else
-                <a href="/Auth/login" class="w3-bar-item w3-button w3-right">Iniciar Sesión</a>
+                <a href="/auth/login" class="w3-bar-item w3-button w3-right">Iniciar Sesión</a>
             @endif
         </div>
     </nav>
