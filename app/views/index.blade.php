@@ -1,4 +1,4 @@
-{{render("header");}}
+{{render("header")}}
 
     <h1 class="w3-center" id="title-main">Bienvenido a Intramed</h1>
     <div id="carrusel">
@@ -9,4 +9,4 @@
 		<img src="{{assets('img/app/5.png')}}" alt="Imagen 5" id="img5" class="img_carru" style="display: none;">
     </div>
 
-{{ render("footer"); }}
+{{ render("footer") }}
