@@ -30,22 +30,22 @@ function createCalendar(elem, year, month) {
         {
           if(d.getMonth() < 10)
           {
-            table += '<td class="Dis" id="' + d.getFullYear() + "-0" + (d.getMonth() + 1) + "-0" + d.getDate() + '">' + d.getDate() + '</td>';
+            table += '<td class="Dis w3-hover-gray w3-round" id="' + d.getFullYear() + "-0" + (d.getMonth() + 1) + "-0" + d.getDate() + '">' + d.getDate() + '</td>';
           }
           else
           {
-            table += '<td class="Dis" id="' + d.getFullYear() + "-" + d.getMonth() + "-0" + d.getDate() + '">' + d.getDate() + '</td>';
+            table += '<td class="Dis w3-hover-gray w3-round" id="' + d.getFullYear() + "-" + d.getMonth() + "-0" + d.getDate() + '">' + d.getDate() + '</td>';
           }
         }
         else
         {
           if(d.getMonth() < 10)
           {
-            table += '<td class="Dis" id="' + d.getFullYear() + "-0" + d.getMonth() + "-" + d.getDate() + '">' + d.getDate() + '</td>';
+            table += '<td class="Dis w3-hover-gray w3-round" id="' + d.getFullYear() + "-0" + d.getMonth() + "-" + d.getDate() + '">' + d.getDate() + '</td>';
           }
           else
           {
-            table += '<td class="Dis" id="' + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + '">' + d.getDate() + '</td>';
+            table += '<td class="Dis w3-hover-gray w3-round" id="' + d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate() + '">' + d.getDate() + '</td>';
           }
         }
         

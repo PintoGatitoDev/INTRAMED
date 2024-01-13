@@ -11,14 +11,21 @@ body
 .formulario
 {
 	display: inline-block;
-	width: 40%;
+	width: 50%;
 }
 
 
 .calendar
 {
 	display: inline-block;
+}
+
+.calendar table
+{
 	border-collapse: collapse;
-	width: 50%;
-	background-color: aliceblue;
+}
+
+.calendar table td
+{
+	padding: 5px;
 }

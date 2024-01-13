@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Models\Citas\Cita_Manager;
 use App\Models\Servicio\Servicio_Manager;
+use App\Models\User\Patient;
 use App\Models\User\User_Manager;
 use Leaf\Http\Response;
 
@@ -13,10 +14,9 @@ use Leaf\Http\Response;
  */
 class CitaController extends Controller {
 	public function reservar_view() {
-		session_start();
-		
-		if(!session()->get("ID_User"))
-		{
+		session()->start();
+
+		if (!session()->get("ID_User")) {
 			return redirect("/");
 		}
 		$serv_Manager = new Servicio_Manager();
@@ -31,12 +31,14 @@ class CitaController extends Controller {
 				"error" => $error,
 				"paciente" => $paciente,
 				"servicios" => $servicios,
+				"ruta" => "/citas/reservar",
 			]);
 		}
 
 		return render("Cita/ReservarCita", [
 			"paciente" => $paciente,
 			"servicios" => $servicios,
+			"ruta" => "/citas/reservar",
 		]);
 	}
 
@@ -50,9 +52,28 @@ class CitaController extends Controller {
 		$C_manager = new Cita_Manager();
 		$result = $C_manager->reservarNuevaCita($id_paciente, $id_medico, $id_servicio, $fecha, $hora);
 		if (!$result) {
-			return redirect('/Cita/reservar?error=' . 0);
+			return redirect('/citas/reservar?error=' . 0);
 		}
-		return redirect("/Citas/MisCitas");
+		return redirect("/citas/MisCitas");
+	}
+
+	public function agendarNueva($id_cita, $id_paciente) {
+		session()->start();
+
+		if (!session()->get("ID_User") && session()->get("Rol") == "Patient") {
+			return redirect("/");
+		}
+		$serv_Manager = new Servicio_Manager();
+		$servicios = $serv_Manager->queryServicios();
+
+		$paciente = new Patient();
+		$paciente->setId_patient($id_paciente);
+
+		return render("Cita/ReservarCita", [
+			"paciente" => $paciente,
+			"servicios" => $servicios,
+			"ruta" => "/citas/agendarNueva",
+		]);
 	}
 
 	public function MisCitas() {

@@ -74,7 +74,7 @@ class AutenticacionController extends Controller {
 			return redirect("/registerRol");
 		}
 
-		$direccion = "/register" . $rol;
+		$direccion = "/auth/register" . $rol;
 		return redirect($direccion);
 	}
 
@@ -112,10 +112,10 @@ class AutenticacionController extends Controller {
 			) == 0
 		) {
 			move_uploaded_file($foto['tmp_name'], $ifFoto);
-			return redirect("/login");
+			return redirect("/auth/login");
 		}
 
-		return redirect("/registerAdmin?error=1");
+		return redirect("/auth/registerAdmin?error=1");
 	}
 
 	public function registerMedicBD() {
@@ -158,9 +158,9 @@ class AutenticacionController extends Controller {
 			) == 0
 		) {
 			move_uploaded_file($foto['tmp_name'], $ifFoto);
-			return redirect("/login");
+			return redirect("/auth/login");
 		}
-		return redirect("/registerMedic?error=1");
+		return redirect("/auth/registerMedic?error=1");
 	}
 
 	public function registerPatientBD() {

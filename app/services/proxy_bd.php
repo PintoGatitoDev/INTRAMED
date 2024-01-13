@@ -67,7 +67,7 @@ class proxy_bd {
 			$user = $this->queryOneUser($Admin->getEmail());
 
 			$insert = "INSERT INTO Administrador (ID_User,Subrol,PassSeguridad)
-            VALUES (" . $user['ID_Usuario'] . ",'" . $Admin->getSubrol() . "','" . $Admin->getPassSecurity() . "')";
+            VALUES (" . $user['ID_User'] . ",'" . $Admin->getSubrol() . "','" . $Admin->getPassSecurity() . "')";
 			$this->bd->query($insert);
 			return 0;
 		}
@@ -422,7 +422,8 @@ class proxy_bd {
 	}
 
 	public function queryCita(Cita $cita) {
-		$query = "SELECT Cita.*, CONCAT(User.Nombre, ' ', User.Apellido_P, ' ', User.Apellido_M) AS Nombre_Medico ,Paciente.ID_User AS IDUsuario
+		$query = "SELECT Cita.*, CONCAT(User.Nombre, ' ', User.Apellido_P, ' ', User.Apellido_M) AS Nombre_Medico ,Paciente.ID_User AS IDUsuario,
+				servicio.Nombre AS Servicio, User.email as Correo_Medico
         FROM Cita
         INNER JOIN Medico
         ON Cita.ID_Medico = Medico.ID_Medico
@@ -430,15 +431,18 @@ class proxy_bd {
         ON Medico.ID_User = user.ID_User
         INNER JOIN paciente
         ON paciente.ID_Paciente = Cita.ID_Paciente
-        WHERE ID_Cita = " . $cita->getId_Cita();
+        INNER JOIN Servicio
+        ON Servicio.ID_Servicio = Cita.ID_Servicio
+        WHERE Cita.ID_Cita = " . $cita->getId_Cita();
 		$result = $this->bd->query($query);
-		$cita = mysqli_fetch_assoc($result);
+		$citaw = mysqli_fetch_assoc($result);
 
-		$query = "SELECT * FROM user WHERE ID_User = " . $cita['IDUsuario'];
+		$query = "SELECT CONCAT(Nombre, ' ', Apellido_P, ' ', Apellido_M) as Nombre_Paciente, email as Correo_Paciente
+		FROM user WHERE ID_User = " . $citaw['IDUsuario'];
 		$result = $this->bd->query($query);
 		$patient = mysqli_fetch_assoc($result);
 
-		$cita = array_merge($cita, $patient);
+		$cita = array_merge($citaw, $patient);
 
 		return $cita;
 	}

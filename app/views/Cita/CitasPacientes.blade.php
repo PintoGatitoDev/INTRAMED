@@ -1,29 +1,26 @@
-<?php render('header'); ?>
+<?php render('header');?>
 
-<div>
-    
-        <div class="Cita">
-            <table>
-                <thead>
+<div class="w3-container">
+    <h2 class="w3-center">Citas Con Pacientes</h2>
+    <table class="w3-table-all w3-centered">
+        <thead>
+            <tr>
+
+                <th colspan="2">Descripción</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($Citas as $cita)
                 <tr>
-
-                    <th class="firt" colspan="2">Descripción</th>
-                    <th class="second">Opciones</th>
-                </tr>
-                </thead>
-                <tbody>
-	                @foreach($Citas as $cita)
-	                <tr>
-	                    <td>Fecha: {{ $cita->getFecha() }}</td>
-	                    <td>Hora: {{ $cita->getHora() }}</td>
-	                    <td> <a href="/Citas/{{$cita->getId_Cita()}}">Detalles</a> </td>
-	                </tr>
-	                @endforeach
-                </tbody>
-            </table>
-        </div>
-    
+                    <td>Fecha: {{ $cita->getFecha() }}</td>
+	                <td>Hora: {{ $cita->getHora() }}</td>
+	                <td> <a href="/citas/{{$cita->getId_Cita()}}" class="w3-button w3-green w3-round-xlarge">Detalles</a> </td>
+	            </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>
 
 
-<?php render('footer'); ?>
+<?php render('footer');?>
