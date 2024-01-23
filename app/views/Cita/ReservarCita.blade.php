@@ -43,10 +43,18 @@
 
 				<label for="horario" class="w3-left">Selecciona un horario:</label>
 				<select name="horario" id="horario" class="w3-select">
-
 				</select>
 
 				<input type="hidden" name="id_paciente" id="id_paciente" value="{{$paciente->getId_patient()}}">
+
+				@if(isset($medic))
+					<input type="hidden" name="id_medico" id="id_medico" value="{{$medic->getId_Medic()}}">
+				@endif
+
+				@if(isset($id_cita))
+					<input type="hidden" name="id_cita" id="id_cita" value="{{$id_cita}}">
+				@endif
+
 				<input type="submit" value="Reservar" class="w3-button w3-margin-top w3-blue">
 		</form>
 </section>

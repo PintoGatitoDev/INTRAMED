@@ -25,7 +25,7 @@
 
     <div class=" w3-container">
         @if(session()->get("Rol") != "Patient")
-            @if($Datos_Cita['Estado'] != "Finalizado")
+            @if($Datos_Cita['Estado'] == "Reservada")
                 <a href="/citas/{{$Datos_Cita['ID_Cita']}}/agendarNueva/{{$Datos_Cita['ID_Paciente']}}" class="w3-button w3-blue">Agendar Nueva Cita</a>
                 <a href="/citas/finalizar?id={{$Datos_Cita['ID_Cita']}}" class="w3-button w3-red">Finalizar</a>
             @endif
@@ -43,4 +43,4 @@
     </div>
 @endif
 
-{{ render('footer'); }}
+{{ render('footer') }}

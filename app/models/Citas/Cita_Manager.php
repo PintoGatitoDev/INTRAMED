@@ -3,6 +3,8 @@
 namespace App\Models\Citas;
 
 use App\Models\Model;
+use App\Models\User\Medic;
+use App\Models\User\User_Manager;
 use App\Services\proxy_bd;
 use App\Models\User\Patient;
 
@@ -23,25 +25,34 @@ class Cita_Manager extends Model
         return $arrayCitasReservadas;
     }
 
-    public function reservarNuevaCita($id_paciente,$id_medico,$id_servicio,$fecha,$hora)
+    public function reservarNuevaCita($id_paciente,$id_servicio,$fecha,$hora)
     {
         $cita = new Cita();
         $cita->setId_Paciente($id_paciente);
-        $cita->setId_Medico($id_medico);
         $cita->setId_Servicio($id_servicio);
         $cita->setFecha($fecha);
         $cita->setHora($hora);
+        $cita->setEstado("Reservada");
 
         $bd = new proxy_bd();
-        return $bd->newCita($cita);
+        $arrayID_Medicos = $bd->queryID_Medicos();
+        $cita->setId_Medico($arrayID_Medicos[rand(0,count($arrayID_Medicos)-1)]);
+
+        $disponibilidad = $bd->queryDisponibilidadCita($cita->getFecha(),$cita->getHora());
+        if($disponibilidad)
+        {
+            return $bd->newCita($cita);
+        }
+        return false;
     }
 
     public function misCitas(int $id_user) : array
     {
-
         $bd = new proxy_bd();
 
-        $paciente = $bd->queryPatient($id_user);
+        $id_paciente = $bd->queryID_Patient($id_user);
+        $u_Manager = new User_Manager();
+        $paciente = $u_Manager->queryID_Patient($id_user);
         return $bd->queryMisCitas($paciente);
     }
 
@@ -57,7 +68,8 @@ class Cita_Manager extends Model
     public function CitasPacientes(int $id_user)
     {
         $bd = new proxy_bd();
-        $medic = $bd->queryMedic($id_user);
+        $u_Manager = new User_Manager();
+        $medic = $u_Manager->queryID_Medic($id_user);
         return $bd->queryCitaPacientes($medic);
     }
 
@@ -75,5 +87,33 @@ class Cita_Manager extends Model
 
         $bd = new proxy_bd();
         return $bd->updateEstadoCita($cita);
+    }
+
+
+    public function agendarNuevaCita($id_paciente,$id_servicio,$id_cita,$fecha,$hora,$id_medico)
+    {
+        $citaActualizar = new Cita();
+
+        $citaActualizar->setId_Cita($id_cita);
+        $citaActualizar->setEstado("Realizada");
+
+        $cita = new Cita();
+        $cita->setId_Paciente($id_paciente);
+        $cita->setId_Servicio($id_servicio);
+        $cita->setId_Medico($id_medico);
+        $cita->setFecha($fecha);
+        $cita->setHora($hora);
+        $cita->setEstado("Reservada");
+
+        $bd = new proxy_bd();
+
+        $disponibilidad = $bd->queryDisponibilidadCita($cita->getFecha(),$cita->getHora());
+        if(!$disponibilidad)
+        {
+            return false;
+        }
+        $bd->newCita($cita);
+        $bd->updateEstadoCita($citaActualizar);
+        return true;
     }
 }

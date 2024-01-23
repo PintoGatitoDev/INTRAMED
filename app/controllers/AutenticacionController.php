@@ -71,7 +71,7 @@ class AutenticacionController extends Controller {
 		$rol = app()->request->get('rol');
 		if ($rol == "") {
 			$error = "Rol no valido o no seleccionado";
-			return redirect("/registerRol");
+			return redirect("/auth/registers");
 		}
 
 		$direccion = "/auth/register" . $rol;
@@ -201,9 +201,9 @@ class AutenticacionController extends Controller {
 			) == 0
 		) {
 			move_uploaded_file($foto['tmp_name'], $ifFoto);
-			return redirect("/login");
+			return redirect("/auth/login");
 		}
-		return redirect("/registerPatient?error=1");
+		return redirect("/auth/registerPatient?error=1");
 	}
 
 	/* Cerrar Sesion */

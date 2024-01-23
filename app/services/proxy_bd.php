@@ -149,9 +149,9 @@ class proxy_bd {
 	}
 
 	public function newCita(Cita $cita) {
-		$insert = "INSERT INTO Cita (ID_Servicio,ID_Paciente,ID_Medico,Fecha,Hora)
+		$insert = "INSERT INTO Cita (ID_Servicio,ID_Paciente,ID_Medico,Fecha,Hora,Estado)
         VALUES (" . $cita->getId_Servicio() . "," . $cita->getId_Paciente() . "," . $cita->getId_Medico() . ",'" .
-		$cita->getFecha() . "','" . $cita->getHora() . "')";
+		$cita->getFecha() . "','" . $cita->getHora() . "','" . $cita->getEstado() . "')";
 		return $this->bd->query($insert);
 	}
 
@@ -413,6 +413,7 @@ class proxy_bd {
 			$cita->setId_Cita($resultCitas['ID_Cita']);
 			$cita->setId_Paciente($resultCitas['ID_Paciente']);
 			$cita->setId_Medico($resultCitas['ID_Medico']);
+			$cita->setEstado($resultCitas['Estado']);
 			$cita->setFecha($resultCitas['Fecha']);
 			$cita->setHora($resultCitas['Hora']);
 			$arrayMisCitas[$j] = $cita;
@@ -458,6 +459,7 @@ class proxy_bd {
 			$cita->setId_Cita($resultCitas['ID_Cita']);
 			$cita->setId_Paciente($resultCitas['ID_Paciente']);
 			$cita->setId_Medico($resultCitas['ID_Medico']);
+			$cita->setEstado($resultCitas['Estado']);
 			$cita->setFecha($resultCitas['Fecha']);
 			$cita->setHora($resultCitas['Hora']);
 			$arrayCitasPacientes[$j] = $cita;
@@ -485,7 +487,51 @@ class proxy_bd {
 		return $arrayCitas;
 	}
 
-	//Update
+	public function queryID_Medicos()
+	{
+		$query = 'SELECT ID_Medico FROM medico';
+		$result = $this->bd->query($query);
+
+		$arrayID =  [];
+		$j = 0;
+		while ($resultCitas = mysqli_fetch_assoc($result)) {
+			$arrayID[$j] = $resultCitas['ID_Medico'];
+			$j++;
+		}
+		return $arrayID;
+	}
+
+	public function queryID_Patient($id_user)
+	{
+		$query = 'SELECT ID_Paciente FROM paciente WHERE ID_User = ' . $id_user;
+		$result = $this->bd->query($query);
+
+		$id_paciente = mysqli_fetch_assoc($result);
+		return $id_paciente["ID_Paciente"];
+	}
+
+	public function queryID_Medic($id_user)
+	{
+		$query = 'SELECT ID_Medico FROM medico WHERE ID_User = ' . $id_user;
+		$result = $this->bd->query($query);
+
+		$id_medico = mysqli_fetch_assoc($result);
+		return $id_medico["ID_Medico"];
+	}
+
+	public function queryDisponibilidadCita($fecha,$hora) : bool
+	{
+		$query = "SELECT ID_Cita FROM cita WHERE Fecha = '$fecha' AND Hora = '$hora'";
+		$result = $this->bd->query($query);
+		$resultDisponibilidad = mysqli_fetch_assoc($result);
+		if($resultDisponibilidad == NULL)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	/*-------------------------------------Update-----------------------------*/
 	public function updateUserPersonal($id_user, $nombre, $apellido_P, $apellido_M, $fecha_Nac) {
 		$update = "UPDATE User
         SET Nombre = '" . $nombre . "', Apellido_P = '" . $apellido_P . "',

@@ -24,6 +24,24 @@ class User_Manager extends Model
         return $user;
     }
 
+    public function queryID_Patient(int $id_user) : Patient
+    {
+        $bd = new proxy_bd();
+        $patient = new Patient();
+
+        $patient->setId_patient($bd->queryID_Patient($id_user));
+        return $patient;
+    }
+
+    public function queryID_Medic(int $id_user) : Medic
+    {
+        $bd = new proxy_bd();
+        $medic = new Medic();
+
+        $medic->setId_Medic($bd->queryID_Medic($id_user));
+        return $medic;
+    }
+
     public function queryMedic(int $id_user) : Medic
     {
         $bd = new proxy_bd();

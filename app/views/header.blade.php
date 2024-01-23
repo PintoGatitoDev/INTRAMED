@@ -36,11 +36,12 @@
                     <button class="w3-button"><i class='fa fa-user' style="font-size: 20px;"></i></button>
                     <div class="w3-dropdown-content w3-bar-block w3-card-4">
                         <a href="#" class="w3-bar-item w3-button w3-blue">Perfil</a>
-                        <a href="/auth/register" class="w3-bar-item w3-button w3-right">Registrar</a>
+                        
                          <a href="/auth/logout" class="w3-bar-item w3-button w3-blue">Cerrar Sesión</a>
                     </div>
                 </div>
             @else
+                <a href="/auth/register" class="w3-bar-item w3-button w3-right">Registrar</a>
                 <a href="/auth/login" class="w3-bar-item w3-button w3-right">Iniciar Sesión</a>
             @endif
         </div>

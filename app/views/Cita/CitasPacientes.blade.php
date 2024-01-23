@@ -6,7 +6,7 @@
         <thead>
             <tr>
 
-                <th colspan="2">Descripción</th>
+                <th colspan="3">Descripción</th>
                 <th>Opciones</th>
             </tr>
         </thead>
@@ -15,6 +15,7 @@
                 <tr>
                     <td>Fecha: {{ $cita->getFecha() }}</td>
 	                <td>Hora: {{ $cita->getHora() }}</td>
+                    <td>Estado: {{ $cita->getEstado() }}</td>
 	                <td> <a href="/citas/{{$cita->getId_Cita()}}" class="w3-button w3-green w3-round-xlarge">Detalles</a> </td>
 	            </tr>
             @endforeach

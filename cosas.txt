@@ -5,16 +5,6 @@ use \App\Controllers\AutenticacionController;
 use \App\Controllers\CitaController;
 
 
-
-
-
-
-app()->get('/registerPatient', 'AutenticacionController@register_Patient_View');
-
-
-app()->post('/registerPatientBD', 'AutenticacionController@registerPatientBD');
-
-
 //Usuarios - Info Pago
 app()->group('/User', function () {
 
