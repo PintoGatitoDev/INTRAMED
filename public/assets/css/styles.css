@@ -1,445 +1,99 @@
 body {
-    padding: 0;
-    margin: 0;
+    background-color: rgb(0, 30, 38) !important;
+    color: white !important;
+    font-family: DM Sans, sans-serif;
+    font-size: 14px;
 }
-
-header {
-    background-color: #3957d8;
-    text-align: center;
-}
-
-#Logo {
-
-    height: 150px;
-    display: inline-block;
-    padding: 0px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0px;
+    font-size: 18px;
 }
-
-#Menu {
-
-    display: inline-block;
-    padding: 0px;
-    margin: 0px;
-    width: 100%;
-    text-align: left;
+.flex {
+    display: flex;
 }
-
-#Menu ul {
-    display: inline-block;
-    padding: 0px;
-    margin: 0px;
+.center-all {
+    justify-content: center;
+    align-items: center;
 }
-
-#Menu ul li {
-    list-style: none;
-    display: inline-block;
+.center-between {
+    justify-content: space-between;
+    align-items: center;
 }
-
-#Menu a {
-    display: inline-block;
-    padding: 10px 40px;
-    color: white;
-    text-decoration: none;
+.center-start {
+    justify-content: flex-start;
+    align-items: center;
 }
-
-ul.submenu {
-    display: none;
-  }
-  
-
-
-#Menu a:hover {
-    background-color: rgb(134, 172, 255);
+.h-screen {
+    height: 100vh;
 }
-
-.Contenido {
-    margin: 20px;
+img {
+    height: 35px;
+    margin-right: 15px;
 }
-
-.formulario {
+p {
+    color: rgb(167, 185, 185);
+}
+.mt-1 {
+    margin-top: 10px;
+}
+.mt-2 {
+    margin-top: 20px;
+}
+.mt-3 {
+    margin-top: 30px;
+}
+.ml-1 {
+    margin-left: 10px;
+}
+.ml-2 {
+    margin-left: 20px;
+}
+.ml-3 {
+    margin-left: 30px;
+}
+.mr-1 {
+    margin-right: 10px;
+}
+.mr-2 {
+    margin-right: 20px;
+}
+.mr-3 {
+    margin-right: 30px;
+}
+.container {
+    max-width: 900px;
     padding: 20px;
-    border: 1px solid #e6e6e6;
-    display: inline-block;
-    width: 50%;
-    margin: 0 auto;
-    border-radius: 5px;
-    box-shadow: 0px 1px black;
 }
-
-.formulario label {
-    width: 100%;
-    display: block;
-    text-align: left;
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-
-.formulario input[type="email"],
-.formulario input[type="password"],
-.formulario input[type="text"],
-.formulario input[type="number"] {
-    border-bottom: 1px solid #dfdfdf;
-    width: 100%;
-    height: 40px;
-    border: 0px;
-    border-bottom: 1px solid whitesmoke;
-    margin: 20px 0px;
-}
-
-.formulario input[type="email"]:focus,
-.formulario input[type="password"]:focus,
-.formulario input[type="number"]:focus {
-    border-bottom: 1px solid #000000;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.125);
-    outline: none;
-}
-
-.formulario select {
-    width: 100%;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.formulario option {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.boton_negro {
-    background-color: #000000;
-    color: #ffffff;
-    font-weight: bold;
-    width: 50%;
-    height: 40px;
-    border: none;
-    border-radius: 5px;
-}
-
-.boton_negro:hover {
-    background-color: #474747;
-}
-
-.datos_medicos
-{
-    display: inline-block;
-    width: 90%;
-    background-color: #ffffff;
-    padding: 10px;
-}
-
-.datos_medicos span
-{
-    display: inline-block;
-    width: 45%;
-    text-align: left;
-    margin: 10px auto;
-    vertical-align: top;
-}
-
-.datos_medicos input, .datos_medicos textarea
-{
-    display: inline-block;
-    width: 45%;
-    
-}
-
-
-/* Main */
-
-main {
-    text-align: center;
-}
-
-#carrusel img {
-    width: 100%;
-}
-
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-    display: block;
-}
-
-.modal_contenido
-{
-    background-color: #FFFFFF;
-    width: 50%;
-    margin: 20px auto;
-    padding: 10px;
-    border-radius: 15px;
-}
-
-.profile
-{
-    display: inline-block;
-    width: 97%;
-    background-color: #fdfdfd;
-    margin: 20px auto;
+.card {
+    background: rgb(1, 42, 53);
+    padding: 0px;
     border-radius: 10px;
-    border: 1px solid #ebebeb;
+    flex-wrap: wrap;
+    padding: 15px;
 }
-
-#perfilOpciones, #apartados, #DivDatosP, #DivFoto
-{
-    display: inline-block;
-}
-
-
-#perfilOpciones
-{
-    width: 20%;
-}
-
-#perfilOpciones
-{
-    width: 20%;
-    text-align: right;
-    vertical-align: top;
-}
-
-#perfilOpciones #opcion li
-{
-    display: inline-block;
-    list-style: none;
-    width: 99%;
-    text-align: center;
-}
-
-#perfilOpciones #opcion a
-{
-    display: inline-block;
-    background-color: #045FB4;
-    color: #FFFFFF;
-    text-decoration: none;
-    padding: 10px;
-    width: 90%;
-    margin: 5px;
-}
-
-#apartados
-{
-    width: 75%;
-    text-align: center;
-}
-
-#DivDatosP
-{
-    width: 70%;
-    vertical-align: top;
-}
-#DivFoto
-{
-    width: 25%;
-}
-
-#DivFoto img
-{
-    width: 100%;
-}
-
-.form_edit
-{
-    display: inline-block;
-    width: 99%;
-    padding: 10px;
-}
-
-
-.form_edit .left,.form_edit .right,.form_edit .center, .form_edit input[type="text"]
-{
-    display: inline-block;
-    width: 45%;
-    text-align: left;
-}
-
-.form_edit input:disabled, .datos_medicos input:disabled, .datos_medicos textarea:disabled
-{
-    border: none;
-    opacity: 1;
-    font-weight: bold;
-    font-variant: normal;
-}
-
-.invisible, .binvisible
-{
-    display: none;
-}
-
-.visible, .bvisible
-{
-    display: inline-block;
-}
-
-
-#editpersonales, #guardar, #cancelarP, #editcontacto, #cancelarC
-{
-    background-color: #0040FF;
-    padding: 10px;
-    text-decoration: none;
-    color: #FFFFFF;
-    border-radius: 15px;
-}
-
-.tabla
-{
-    text-align: center;
-}
-
-
-.TDatos
-{
-    border-collapse: collapse;
-    width: 95%;
-    margin: auto;
-}
-
-.TDatos thead
-{
-    background-color: #55ACEE;
-}
-
-.TDatos thead th
-{
-    padding: 10px;
-}
-.TDatos tbody td
-{
-    padding: 10px;
-}
-
-.TDatos table thead
-{
-    background-color: #ffffff;
-}
-.TDatos table
-{
-    width: 100%;
-}
-
-.Opciones
-{
-    display: inline-block;
-    width: 100%;
-}
-
-.Opciones a, .Opciones h2
-{
-    display: inline-block ;
-}
-
-.Opciones a
-{
-    padding: 10px;
-    background-color: #3c7aff;
-    color: #FFFFFF;
-    text-decoration: none;
-    float: right;
-    margin: 20px;
-    margin-right: 50px;
-    border-radius: 10px;
-}
-
-.btn_opciones
-{
-    background-color: #000000;
-    color: #FFFFFF;
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.Cita
-{
-    display: inline-block;
-    height: 300px;
-    width: 95%;
-    margin: 10px;
-    background-color: #E3F2FF;
-    border-radius: 10px;
-    border: 10px solid #DAEDFF;
-}
-
-.Cita table
-{
-    width: 95%;
-}
-
-.Cita table .firt
-{
-    width: 80%;
-}
-
-
-.Cita table .second
-{
-    width: 15%;
-}
-
-
-
-
-/* Footer */
-
-footer {
-    border-top: 2px solid rgb(0, 0, 0);
-    background-color: whitesmoke;
-    padding: 10px;
-}
-
-.fa {
-    padding: 20px;
-    font-size: 30px;
-    width: 50px;
-    text-align: center;
+.green,
+a {
+    color: #44be6d;
     text-decoration: none;
 }
-
-.fa:hover {
-    opacity: 0.7;
+a:hover {
+    text-decoration: underline;
+}
+ion-icon {
+    font-size: 24px;
+    width: 100px;
 }
 
-.fa-facebook {
-    background: #3B5998;
-    color: white;
-}
-
-.fa-twitter {
-    background: #55ACEE;
-    color: white;
-}
-
-.fa-instagram {
-    background: #125688;
-    color: white;
-}
-
-
-@media screen and (max-width: 800px) {
-    .formulario {
-        padding: 20px;
-        border: 1px solid #f3f3f3;
-        display: inline-block;
-        width: 80%;
-        margin: 0 auto;
-        border-radius: 5px;
+@media only screen and (max-width: 500px) {
+    .flex.card {
+        flex-wrap: wrap;
     }
-
-    #Logo {
-        height: 150px;
+    .flex.card > * {
+        width: 100% !important;
     }
-
-    #perfilOpciones,#DivDatosP,#DivFoto
-    {
-        width: 95%;
-    }
-
-
 }
