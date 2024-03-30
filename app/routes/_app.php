@@ -53,5 +53,10 @@ app()->group("/pagos",function ()
 	app()->get("/deudasPacientes","PagoController@deudasPacientesAdmin_view");
 	app()->get("/pacienteDeudas","PagoController@pagosDPaciente_view");
 	app()->get("/pacienteRealizados","PagoController@pagosRPaciente_view");
-	app()->get("/pagar/{id_pago}/paciente/{id_paciente}","PagoController@seleccionarMetodo_view");
+	app()->group("/pagar", function ()
+	{
+		app()->get("/{id_pago}/paciente/{id_paciente}/metodo/{id_infoP}","PagoController@realizarPago");
+		app()->get("/{id_pago}/paciente/{id_paciente}","PagoController@seleccionarMetodo_view");
+		
+	});
 });

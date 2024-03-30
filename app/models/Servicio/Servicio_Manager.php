@@ -19,7 +19,7 @@ class Servicio_Manager extends Model
         return $servicios;
     }
 
-    public function queryServicio($id_Servicio)
+    public function queryServicio(int $id_Servicio)
     {
         $proxy_bd = new proxy_bd();
         $servicios = $proxy_bd->queryServicio($id_Servicio);

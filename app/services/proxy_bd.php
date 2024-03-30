@@ -317,27 +317,6 @@ class proxy_bd
 		return $admin;
 	}
 
-	public function queryMethodPago(int $id_paciente): array
-	{
-		$query = "SELECT * FROM info_pago WHERE ID_Paciente =" . $id_paciente;
-		$result = $this->bd->query($query);
-		$j = 0;
-		$infpagos = array();
-		while ($arrayinfpago = mysqli_fetch_assoc($result)) {
-			$pago = new InfPago();
-			$pago->setID_InfoPago($arrayinfpago["ID_InfoPago"]);
-			$pago->setID_Paciente($arrayinfpago["ID_Paciente"]);
-			$pago->setNumero_Cuenta($arrayinfpago["Numero_Cuenta"]);
-			$pago->setForma_Cuenta($arrayinfpago["Forma_Cuenta"]);
-			$pago->setNombre_Titular($arrayinfpago["Nombre_Titular"]);
-			$pago->setVencimiento_Cuenta($arrayinfpago["Vencimiento_Cuenta"]);
-			$pago->setSaldo($arrayinfpago["Saldo"]);
-			$infpagos[$j] = $pago;
-			$j++;
-		}
-		return $infpagos;
-	}
-
 	public function queryID_Dato($id_paciente): array
 	{
 		$query = "SELECT ID_Dato,Fecha_Historial FROM Datos_Medicos WHERE ID_Paciente = " . $id_paciente;
@@ -369,7 +348,7 @@ class proxy_bd
 		return $arrayID;
 	}
 
-	public function queryID_Patient($id_user)
+	public function queryID_Patient(int $id_user)
 	{
 		$query = 'SELECT ID_Paciente FROM paciente WHERE ID_User = ' . $id_user;
 		$result = $this->bd->query($query);
@@ -399,6 +378,49 @@ class proxy_bd
 			return true;
 		}
 		return false;
+	}
+
+	public function queryMethodPago(int $id_paciente): array
+	{
+		$query = "SELECT * FROM info_pago WHERE ID_Paciente =" . $id_paciente;
+		$result = $this->bd->query($query);
+		$j = 0;
+		$infpagos = array();
+		while ($arrayinfpago = mysqli_fetch_assoc($result)) {
+			$pago = new InfPago();
+			$pago->setID_InfoPago($arrayinfpago["ID_InfoPago"]);
+			$pago->setID_Paciente($arrayinfpago["ID_Paciente"]);
+			$pago->setNumero_Cuenta($arrayinfpago["Numero_Cuenta"]);
+			$pago->setForma_Cuenta($arrayinfpago["Forma_Cuenta"]);
+			$pago->setNombre_Titular($arrayinfpago["Nombre_Titular"]);
+			$pago->setVencimiento_Cuenta($arrayinfpago["Vencimiento_Cuenta"]);
+			$pago->setSaldo($arrayinfpago["Saldo"]);
+			$infpagos[$j] = $pago;
+			$j++;
+		}
+		return $infpagos;
+	}
+
+	public function queryDatosMetodo(int $id_metodo) : InfPago
+	{
+		$query = "SELECT * FROM info_pago WHERE ID_InfoPago = " . $id_metodo;
+		$result = $this->bd->query($query);
+		$arrayDatos =  mysqli_fetch_array($result);
+		$inf = new InfPago();
+		$inf->setID_InfoPago($arrayDatos["ID_InfoPago"]);
+		$inf->setID_Paciente($arrayDatos["ID_Paciente"]);
+		$inf->setNumero_Cuenta($arrayDatos["Numero_Cuenta"]);
+		$inf->setForma_Cuenta($arrayDatos["Forma_Cuenta"]);
+		$inf->setNombre_Titular($arrayDatos["Nombre_Titular"]);
+		$inf->setVencimiento_Cuenta($arrayDatos["Vencimiento_Cuenta"]);
+		$inf->setSaldo($arrayDatos["Saldo"]);
+		return $inf;
+	}
+
+	public function updateSaldoMetodo(int $id_metodo,int $saldoNuevo) : bool
+	{
+		$update = "UPDATE info_pago SET Saldo = $saldoNuevo WHERE ID_InfoPago = $id_metodo";
+		return $this->bd->query($update);
 	}
 
 
@@ -692,5 +714,12 @@ class proxy_bd
 			$j++;
 		}
 		return $arrayPagosR;
+	}
+
+	public function updatePagarPago(int $id_pago) : void
+	{
+		$update = "UPDATE pago
+		SET Estado ='Pagado', Fecha_Pagada = '" . date("Y-m-d") . "'";
+		$this->bd->query($update);
 	}
 }

@@ -23,6 +23,7 @@
         <label for="Cargos">Cargos Extra:</label>
         <textarea name="Cargos" id="Cargos" cols="30" rows="1"></textarea>
         <input type="submit" value="Confirmar">
+        <a href="/citas/{{$cita["ID_Cita"]}}" class="w3-button w3-round w3-red">Cancelar</a>
     </form>
 </section>
 

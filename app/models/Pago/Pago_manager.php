@@ -5,6 +5,7 @@ namespace App\Models\Pago;
 use App\Models\Model;
 use App\Models\Cita\Cita;
 use App\Models\Pago\Pago;
+use App\Models\User\User_Manager;
 use App\Services\proxy_bd;
 use App\Models\Cita\Cita_Manager;
 use App\Models\Servicio\Servicio_Manager;
@@ -17,7 +18,7 @@ use App\Models\Servicio\Servicio_Manager;
  */
 class Pago_Manager extends Model
 {
-    public function generarFormatoPago($id_cita): array
+    public function generarFormatoPago(int $id_cita): array
     {
         $fechaE = date("Y-m-d");
         $horaE = date("H:i");
@@ -94,5 +95,28 @@ class Pago_Manager extends Model
         $proxy_bd = new Proxy_bd();
         $id_paciente = $proxy_bd->queryID_Patient($id_user);
         return $proxy_bd->queryDeudas($id_paciente);
+    }
+
+    public function realizarPago($id_pago, $id_paciente, $id_metodo) : bool
+    {
+        $user_m =  new User_Manager();
+        $metodo = $user_m->obtenerDatosMetodo($id_metodo);
+
+        $datosPago = $this->Obtenerpago($id_pago);
+        $pago = $datosPago["pago"];
+        if($metodo->getSaldo() < $pago->getMonto())
+        {
+            return false;
+        }
+        
+        echo $metodo->getSaldo() . "<br>";
+
+        $metodo->quitarSaldo($pago->getMonto());
+
+        echo $metodo->getSaldo();
+        $proxy_bd = new Proxy_bd(); 
+        $proxy_bd->updateSaldoMetodo($id_metodo,$metodo->getSaldo());
+        $proxy_bd->updatePagarPago($id_pago);
+        return true;
     }
 }

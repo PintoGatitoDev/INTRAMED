@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\Controller;
 use App\Models\Cita\Cita_Manager;
 use App\Models\Pago\Pago_Manager;
+use App\Models\User\User_Manager;
 
 class PagoController extends Controller
 {
@@ -118,9 +119,28 @@ class PagoController extends Controller
             return app()->push("/");
         }
 
-        echo $id_paciente;
-        echo "   " . $id_pago;
+        $user_m = new User_Manager();
+        $metodosP = $user_m->obtenerMethodPago($id_paciente);
+
+        if(app()->request()->get("error"))
+        {
+            $error = app()->request()->get("error");
+            return render("/Pago/selectMetodo",[
+                "metodosP" => $metodosP,
+                "id_pago" => $id_pago,
+                "id_paciente" => $id_paciente,
+                "error" => $error
+            ]);
+        }
+
+        return render("/Pago/selectMetodo",[
+            "metodosP" => $metodosP,
+            "id_pago" => $id_pago,
+            "id_paciente" => $id_paciente
+        ]);
     }
+
+    
 
 
     /*----------------------------------------------------------Logic---------------------------------------------------*/
@@ -141,5 +161,25 @@ class PagoController extends Controller
         $cita_m = new Cita_Manager();
         $cita_m->finalizarCita($id_cita);
         return app()->push("/");
+    }
+
+    public function realizarPago($id_pago,$id_paciente,$id_metodo)
+    {
+        session()->start();
+        if (!session()->get("ID_User")) {
+            return app()->push("/");
+        }
+
+        $pagoM = new Pago_Manager();
+        $result = $pagoM->realizarPago($id_pago, $id_paciente, $id_metodo);
+
+        if(!$result)
+        {
+            return app()->push("/pagos/pagar/" . $id_pago . "/paciente/" . $id_paciente, [
+                "error" => 1
+            ]);
+        }
+
+        return app()->push("/pagos/pagoRealizado/" . $id_pago);
     }
 }

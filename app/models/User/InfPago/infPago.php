@@ -80,4 +80,8 @@ class InfPago extends Model
 	public function setSaldo(float $value) {
 		$this->Saldo = $value;
 	}
+
+	public function quitarSaldo(int $saldo) : void {
+		$this->Saldo -= $saldo;
+	}
 }

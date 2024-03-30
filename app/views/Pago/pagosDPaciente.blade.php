@@ -13,7 +13,7 @@
                         Fecha Pagada: @if($pago->getFecha_Pagada()) {{$pago->getFecha_Pagada()}} @else ------ @endif &emsp; &emsp;
                         ID de Cita: {{ $pago->getID_Cita()}}
                     </td>
-                    <td><a href="/pagos/pagoRealizado/{{$pago->getID_Pago()}}">Detalles</a></td>
+                    <td><a href="/pagos/pagoRealizado/{{$pago->getID_Pago()}}" class="w3-button w3-green">Detalles</a></td>
                 </tr>
                 @endforeach
             </tbody>

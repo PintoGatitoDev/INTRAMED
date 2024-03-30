@@ -60,4 +60,16 @@ class User_Manager extends Model
         return $bd->addMethond($infPago);
     }
 
+    public function obtenerMethodPago(int $id_paciente) : array
+    {
+        $bd = new proxy_bd();
+        return $bd->queryMethodPago($id_paciente);
+    }
+
+    public function obtenerDatosMetodo(int $id_metodo) : InfPago
+    {
+        $bd = new proxy_bd();
+        return $bd->queryDatosMetodo($id_metodo);
+    }
+
 }

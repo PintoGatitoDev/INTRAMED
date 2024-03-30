@@ -18,8 +18,11 @@
                 @endif
             </p>
             <p>Monto total: ${{$pago->getMonto()}}</p>
+            <p>Fecha Pagada: {{$pago->getFecha_Pagada()}}</p>
         <div class="w3-container w3-padding w3-right">
-            <a href="/pagos/pagar/{{$pago->getID_Pago()}}/paciente/{{$datosCita["ID_Paciente"]}}" class="w3-button w3-round w3-green">Pagar</a>
+            @if($pago->getEstado() == "Por Pagar" AND session()->get("Rol") == "Patient")
+                <a href="/pagos/pagar/{{$pago->getID_Pago()}}/paciente/{{$datosCita["ID_Paciente"]}}" class="w3-button w3-round w3-green">Pagar</a>
+            @endif
         </div>
     </div>
 </section>
