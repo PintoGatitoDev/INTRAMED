@@ -14,7 +14,7 @@
                         Saldo: {{$metodo->getSaldo()}}
                     </td>
                     <td><a href="/pagos/pagar/{{$id_pago}}/paciente/{{$id_paciente}}/metodo/{{$metodo->getID_InfoPago()}}"
-                    class="w3-button w3-green w3-round">Seleccionar</a></td>
+                    class="w3-button w3-green w3-round">Pagar</a></td>
                 </tr>
                 @endforeach
             </tbody>

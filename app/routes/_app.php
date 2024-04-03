@@ -56,7 +56,6 @@ app()->group("/pagos",function ()
 	app()->group("/pagar", function ()
 	{
 		app()->get("/{id_pago}/paciente/{id_paciente}/metodo/{id_infoP}","PagoController@realizarPago");
-		app()->get("/{id_pago}/paciente/{id_paciente}","PagoController@seleccionarMetodo_view");
-		
+		app()->get("/{id_pago}/paciente/{id_paciente}","PagoController@seleccionarMetodo_view");	
 	});
 });

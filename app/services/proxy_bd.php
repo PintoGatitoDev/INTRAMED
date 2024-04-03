@@ -649,7 +649,7 @@ class proxy_bd
 		return $arrayDeudasPaciente;
 	}
 
-	public function queryPago($id_pago)
+	public function queryPago(int $id_pago): Pago
 	{
 		$query = "SELECT * FROM pago WHERE ID_Pago = " . $id_pago;
 		$result = $this->bd->query($query);
@@ -719,7 +719,8 @@ class proxy_bd
 	public function updatePagarPago(int $id_pago) : void
 	{
 		$update = "UPDATE pago
-		SET Estado ='Pagado', Fecha_Pagada = '" . date("Y-m-d") . "'";
-		$this->bd->query($update);
+		SET Estado ='Pagado', Fecha_Pagada = '" . date("Y-m-d") . "'
+		WHERE ID_Pago = " . $id_pago;
+		return $this->bd->query($update);
 	}
 }

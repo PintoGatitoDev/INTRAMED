@@ -69,7 +69,7 @@ class Pago_Manager extends Model
         return $proxy_bd->queryDeudasPacienteAdmin();
     }
 
-    public function Obtenerpago($id_pago){
+    public function Obtenerpago(int $id_pago){
         $proxy_bd = new Proxy_bd();
         $pago = $proxy_bd->queryPago($id_pago);
 
@@ -90,14 +90,14 @@ class Pago_Manager extends Model
         return $proxy_bd->queryPagosRealizadosP($id_paciente);
     }
 
-    public function pagosDeudadasP($id_user): array
+    public function pagosDeudadasP(int $id_user): array
     {
         $proxy_bd = new Proxy_bd();
         $id_paciente = $proxy_bd->queryID_Patient($id_user);
         return $proxy_bd->queryDeudas($id_paciente);
     }
 
-    public function realizarPago($id_pago, $id_paciente, $id_metodo) : bool
+    public function realizarPago(int $id_pago,int $id_paciente,int $id_metodo) : bool
     {
         $user_m =  new User_Manager();
         $metodo = $user_m->obtenerDatosMetodo($id_metodo);
@@ -112,8 +112,7 @@ class Pago_Manager extends Model
         echo $metodo->getSaldo() . "<br>";
 
         $metodo->quitarSaldo($pago->getMonto());
-
-        echo $metodo->getSaldo();
+        
         $proxy_bd = new Proxy_bd(); 
         $proxy_bd->updateSaldoMetodo($id_metodo,$metodo->getSaldo());
         $proxy_bd->updatePagarPago($id_pago);
