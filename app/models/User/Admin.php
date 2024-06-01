@@ -35,4 +35,8 @@ class Admin extends Employee
 	public function getPassSecurity() : string {
 		return $this->PassSecurity;
 	}
+
+    public function setPassSecurity(string $value) {
+		$this->PassSecurity = $value;
+	}
 }

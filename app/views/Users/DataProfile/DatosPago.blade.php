@@ -41,7 +41,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <a href="/User/{{ $pago->getID_InfoPago()}}/DelInfPago" class="w3-button w3-red w3-round w3-padding">Borrar</a>
+                                    <a href="/user/{{$id_paciente}}/delPago/{{ $pago->getID_InfoPago()}}" class="w3-button w3-red w3-round w3-padding">Borrar</a>
                                 </td>
                             </tr>
                         </tbody>

@@ -1,5 +1,6 @@
-<section class="Opciones">
+<section class="Opciones w3-container w3-margin-bottom">
     <h2 class="center">Reportes Medicos</h2>
+    <a href="/user/{{$id_paciente}}/addInfMedic" class="w3-button w3-blue">Agregar Nuevo</a>
 </section>
 <div class="tabla">
     <table class="w3-table w3-striped w3-bordered">
@@ -20,12 +21,12 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <a href="/User/InfMedic/{{ $dato->getID_Dato() }}"
-                                        class="btn_opciones">Consultar</a>
+                                    <a href="/user/{{$id_paciente}}/infMedic/{{ $dato->getID_Dato() }}"
+                                        class="w3-button w3-blue">Consultar</a>
                                 </td>
                                 <td>
-                                    <a href="/User/DelInfMedic/{{ $dato->getID_Dato() }}"
-                                        class="btn_opciones">Borrar</a>
+                                    <a href="/user/{{$id_paciente}}/delMedic/{{ $dato->getID_Dato() }}"
+                                        class="w3-button w3-red">Borrar</a>
                                 </td>
                             </tr>
                         </tbody>

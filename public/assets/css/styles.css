@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: right;
     overflow-x: hidden;
+    font-weight: 900;
 }
 
 .sectionIMG p,
@@ -142,3 +143,9 @@
     width: 95%;
     margin-bottom: 25%;
 }
+
+.binvisible,.invisible
+{
+    display: none;
+}
+

@@ -99,4 +99,5 @@
 
 
 <script src="/{{ assets('js/apartados.js') }}"></script>
+<script src="/{{ assets('js/editar.js') }}"></script>
 <?php render('footer');?>

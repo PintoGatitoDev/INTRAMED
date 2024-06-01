@@ -8,7 +8,7 @@
         Administrador
         @endif
     </h2>
-    <form action="/User/{{ $id_user }}/EditInfPersonal" method="POST" class="">
+    <form action="/user/{{ $id_user }}/EditInfPersonal" method="POST" class="">
         <p>
         <div class="left"><span>Nombre: </span>
             <input type="text" id="Nombre" name="Nombre" value="{{ $nombre }}" disabled class="editP">
@@ -132,9 +132,9 @@
     }
 ?>
 
-        <a href="#" class="bvisible" id="editpersonales">Editar Datos</a>
-        <input type="submit" value="Actualizar" class="binvisible" id="guardar">
-        <a href="#" class="binvisible" id="cancelarP">Cancelar</a>
+        <a href="#" class="bvisible w3-button w3-blue" id="editpersonales">Editar Datos</a>
+        <input type="submit" value="Actualizar" class="binvisible w3-button w3-blue" id="guardar">
+        <a href="#" class="binvisible w3-button w3-blue" id="cancelarP">Cancelar</a>
     </form>
 </div>
 <div id="DivFoto" class="quarter-container">

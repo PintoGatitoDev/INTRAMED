@@ -271,7 +271,7 @@ class proxy_bd
 	public function queryAdmin(int $id_user): Admin
 	{
 		$query = "SELECT
-        User.ID_Usuario,
+        User.ID_User,
         User.Email,
         User.Password,
         User.Nombre,
@@ -290,15 +290,15 @@ class proxy_bd
         Administrador.PassSeguridad
       FROM
         User
-      INNER JOIN Administrador ON User.ID_Usuario = Administrador.ID_Usuario
+      INNER JOIN Administrador ON User.ID_User = Administrador.ID_User
       WHERE
-        User.ID_Usuario = " . $id_user . ";";
+        User.ID_User = " . $id_user . ";";
 
 		$result = $this->bd->query($query);
 		$array = mysqli_fetch_assoc($result);
 		$admin = new Admin();
 		$admin->setId_Admin($array["ID_Administrador"]);
-		$admin->setId_user($array["ID_Usuario"]);
+		$admin->setId_user($array["ID_User"]);
 		$admin->setEmail($array["Email"]);
 		$admin->setNombre($array["Nombre"]);
 		$admin->setApellido_p($array["Apellido_P"]);
@@ -366,6 +366,96 @@ class proxy_bd
 		return $id_medico["ID_Medico"];
 	}
 
+	/*----------------------------------------------Inf Personal -------------------------------------------------*/
+	public function updateUserPersonal($id_user, $nombre, $apellido_P, $apellido_M, $fecha_Nac) {
+		$update = "UPDATE User
+        SET Nombre = '" . $nombre . "', Apellido_P = '" . $apellido_P . "',
+        Apellido_M = '" . $apellido_M . "', Fecha_Nac = '" . $fecha_Nac . "'
+        WHERE ID_User = " . $id_user;
+		return $this->bd->query($update);
+	}
+
+	public function updatePatientPersonal(Patient $patient) {
+		$this->updateUserPersonal($patient->getId_user(), $patient->getNombre(), $patient->getApellido_p(),
+			$patient->getApellido_m(), $patient->getFecha_Nacimiento());
+
+		$update = "UPDATE Paciente
+        SET Estado_Civil = '" . $patient->getEstado_Civil() . "'
+        WHERE ID_User = " . $patient->getId_user();
+		return $this->bd->query($update);
+	}
+
+	public function updateMedicPersonal(Medic $medic) {
+		$this->updateUserPersonal($medic->getId_user(), $medic->getNombre(), $medic->getApellido_p(),
+			$medic->getApellido_m(), $medic->getFecha_Nacimiento());
+
+		$update = "UPDATE Medico
+        SET Subrol = '" . $medic->getSubrol() . "',
+        Area_Trabajo = '" . $medic->getArea_Trabajo() . "'
+        WHERE ID_User = " . $medic->getId_user();
+		return $this->bd->query($update);
+	}
+
+	public function updateAminPersonal(Admin $admin) {
+		$this->updateUserPersonal($admin->getId_user(), $admin->getNombre(), $admin->getApellido_p(),
+			$admin->getApellido_m(), $admin->getFecha_Nacimiento());
+
+		$update = "UPDATE Administrador
+        SET Subrol = '" . $admin->getSubrol() . "'
+        WHERE ID_User = " . $admin->getId_user();
+		return $this->bd->query($update);
+	}
+
+	public function updateUserContacto($id, $direccion, $telefono) {
+		$update = "UPDATE User
+        SET Telefono = $telefono,
+          Direccion = '$direccion'
+        WHERE ID_User = $id";
+		return $this->bd->query($update);
+	}
+
+	public function updatePatientContacto($id, $num_Emergencia) {
+		$update = "UPDATE Paciente
+        SET Numero_Emergencia = $num_Emergencia
+        WHERE ID_User = $id";
+		return $this->bd->query($update);
+	}
+
+	/*----------------------------------------------Datos Medicos ----------------------------------------------*/
+	public function addInfoMedic(DatosMedicos $infMedic, int $ID_Paciente) {
+		$insert = "INSERT INTO Datos_Medicos (ID_Paciente,Peso,Altura,Grupo_Sanguineo,Presion_Arterial,Nivel_Glucosa,Incapacidades, Nota, Fecha_Historial)
+        VALUES ($ID_Paciente," . $infMedic->getPeso() . "," . $infMedic->getAltura() . ",'" . $infMedic->getGrupo_Sanguineo() . "'," . $infMedic->getPresion_Arterial() . "," .
+		$infMedic->getNivel_Glucosa() . ",'" . $infMedic->getIncapacidades() . "',' " . $infMedic->getNota() . "','" . $infMedic->getFecha_Historial() . "')";
+		return $this->bd->query($insert);
+	}
+
+	public function queryInfMedic($id_infMedic): DatosMedicos {
+		$query = "SELECT * FROM Datos_Medicos WHERE ID_Dato = " . $id_infMedic;
+
+		$result = $this->bd->query($query);
+
+		$arrayInfMedic = mysqli_fetch_assoc($result);
+		$infMedic = new DatosMedicos();
+		$infMedic->setID_Dato($arrayInfMedic['ID_Dato']);
+		$infMedic->setID_Paciente($arrayInfMedic["ID_Paciente"]);
+		$infMedic->setPeso($arrayInfMedic["Peso"]);
+		$infMedic->setAltura($arrayInfMedic["Altura"]);
+		$infMedic->setGrupo_Sanguineo($arrayInfMedic["Grupo_Sanguineo"]);
+		$infMedic->setPresion_Arterial($arrayInfMedic["Presion_Arterial"]);
+		$infMedic->setNivel_Glucosa($arrayInfMedic["Nivel_Glucosa"]);
+		$infMedic->setIncapacidades($arrayInfMedic["Incapacidades"]);
+		$infMedic->setNota($arrayInfMedic["Nota"]);
+		$infMedic->setFecha_Historial($arrayInfMedic['Fecha_Historial']);
+
+		return $infMedic;
+	}
+
+	public function deleteInfMedic(int $id_infMedic): bool {
+		$delete = "DELETE FROM Datos_Medicos WHERE ID_Dato = " . $id_infMedic;
+		return $this->bd->query($delete);
+	}
+
+
 
 	/*---------------------------------------------- Inf pago-----------------------------------------------------*/
 	public function addMethond(InfPago $pago): bool
@@ -421,6 +511,11 @@ class proxy_bd
 	{
 		$update = "UPDATE info_pago SET Saldo = $saldoNuevo WHERE ID_InfoPago = $id_metodo";
 		return $this->bd->query($update);
+	}
+
+	public function deleteMethodPago(int $id_infpago): bool {
+		$delete = "DELETE FROM info_pago WHERE ID_InfoPago = " . $id_infpago;
+		return $this->bd->query($delete);
 	}
 
 
@@ -721,6 +816,6 @@ class proxy_bd
 		$update = "UPDATE pago
 		SET Estado ='Pagado', Fecha_Pagada = '" . date("Y-m-d") . "'
 		WHERE ID_Pago = " . $id_pago;
-		return $this->bd->query($update);
+		$this->bd->query($update);
 	}
 }

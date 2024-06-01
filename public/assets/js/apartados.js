@@ -7,7 +7,7 @@ botones.forEach(button => {
   function handleButtonClick(event) {
     event.preventDefault();
     const sectionId = event.target.getAttribute('href');
-    hideAllSections();
+    hideAllSections(sectionId);
     document.querySelector(`#${sectionId}`).style.display = 'block';
   }
   
@@ -18,5 +18,5 @@ botones.forEach(button => {
       document.querySelector('#contenedor3'),
       document.querySelector('#contenedor4'),
     ];
-    contenedores.forEach(contenedor => contenedor.style.display = 'none');
+    contenedores.forEach(contenedor => {if(contenedor){contenedor.style.display = 'none'}});
   }

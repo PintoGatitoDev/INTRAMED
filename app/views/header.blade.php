@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link rel="stylesheet" type="text/css" href="/{{assets('css/styles.css')}}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <meta charset="UTF-8">
 
 
 </head>
@@ -35,7 +36,7 @@
                     @endif
                 </div>
             </div>
-
+            @if(session()->get("Rol") != "Medic")
             <div class="w3-dropdown-hover">
                 <button class="w3-button">Pagos</button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4 w3-blue">
@@ -48,17 +49,19 @@
                     @endif
                 </div>
             </div>
+            @endif
 
             <div class="w3-dropdown-hover w3-right margin-right-64">
                 <button class="w3-button"><i class='fa fa-user' style="font-size: 20px;"></i></button>
                 <div class="w3-dropdown-content w3-bar-block w3-card-4">
                     <a href="/user/profile" class="w3-bar-item w3-button w3-blue">Perfil</a>
-
+                    @if(session()->get("Rol") != "Patient")
+                        <a href="/auth/register" class="w3-bar-item w3-button w3-blue w3-right">Registrar</a>
+                    @endif
                     <a href="/auth/logout" class="w3-bar-item w3-button w3-blue">Cerrar Sesión</a>
                 </div>
             </div>
             @else
-            <a href="/auth/register" class="w3-bar-item w3-button w3-right">Registrar</a>
             <a href="/auth/login" class="w3-bar-item w3-button w3-right">Iniciar Sesión</a>
             @endif
         </div>

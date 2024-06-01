@@ -8,7 +8,7 @@
 				<label for="servicio" class="w3-left">Elija el servicio al que desee reservar una cita:</label>
 				<select name="servicio" id="servicio" class="w3-select">
 						@foreach($servicios as $servicio)
-								<option value="{{$servicio->getID_Servicio()}}">{{ $servicio->getNombre()}} - Costo {{ $servicio->getCosto()}} $</option>
+								<option value="{{$servicio->getID_Servicio()}}"> {{ $servicio->getNombre() }}  - Costo {{ $servicio->getCosto()}} $</option>
 						@endforeach
 				</select>
 

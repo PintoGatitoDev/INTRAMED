@@ -25,10 +25,19 @@ app()->group("/auth", function () {
 	app()->post("/loginAdmin","AuthController@loginAdmin");
 });
 
+
+//Usuario
 app()->group("/user", function() {
 	app()->get("/profile","UserController@profile");
 	app()->get("/{id}/NewInfPago","UserController@newInfPago_View");
 	app()->post("/{id}/addInfPago","UserController@addInfPago");
+	app()->post("/{id}/EditInfPersonal","UserController@editInfPersonal");
+	app()->post("/{id}/EditInfContacto","UserController@editContacto");
+	app()->get("/{id}/addInfMedic","UserController@newInfMedic_view");
+	app()->post("/{id}/addInfMedic","UserController@addInfMedic");
+	app()->get("{id}/infMedic/{id_inf}","UserController@infMedicView");
+	app()->get("{id}/delMedic/{id_inf}","UserController@DelInfMedic");
+	app()->get("{id}/delPago/{id_pago}","UserController@DelInfPago");
 });
 
 //Citas
